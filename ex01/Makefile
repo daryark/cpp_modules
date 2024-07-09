@@ -1,7 +1,8 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC = megaphone.cpp 
+SRC = PhoneBook.cpp Contact.cpp
+HDR = PhoneBook.hpp Contact.hpp
 
 CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
 
@@ -14,7 +15,7 @@ $(NAME): $(OBJ)
 	$(CC_FLAGS) -o $@ $<
 	@echo "$(GREEN)OK$(RE)"
 
-%.o:%.cpp phonebook.hpp
+%.o:%.cpp $(HDR)
 	$(CC_FLAGS) -c $< -o $@
 
 clean:
