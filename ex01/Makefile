@@ -13,7 +13,7 @@ all:$(NAME)
 
 $(NAME): $(OBJ)
 	$(CC_FLAGS) -o $@ $<
-	@echo "$(GREEN)OK$(RE)"
+	# @echo "$(GREEN)OK$(RE)"
 
 %.o:%.cpp $(HDR)
 	$(CC_FLAGS) -c $< -o $@
