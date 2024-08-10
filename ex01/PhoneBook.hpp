@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:44:07 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/07/11 00:31:25 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/10 14:43:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 class PhoneBook
 {
-    private:
-        Contact contacts[8];
-        int     amnt;
+    Contact contacts[8];
+    int     amnt;
     
     public:
         PhoneBook();
