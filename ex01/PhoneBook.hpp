@@ -6,30 +6,32 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:44:07 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/12 14:42:39 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:59:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include <iostream>
-// #include "Contact.hpp"
+#include <string>
+#include <iomanip>
+#include <sstream>
+#include "Contact.hpp"
+
+#define PBOOK_LEN   8
+#define PRINT_W     10
+
 
 class PhoneBook
 {
-    // Contact contacts[8];
     private:
-        int     amnt;
-    public:
-        enum Action
-        {
-            ADD,
-            SEARCH,
-            DELETE
-        };
-    
+        Contact contacts[8];
     public:
     PhoneBook();
     ~PhoneBook();
-    // void    addContact(Contact contact);
-    bool    searchContact(unsigned int id);
+    void    addContact(size_t *id);
+    void    printContactById(size_t id);
+    void    searchContact(size_t id);
+    void    showContacts();
     // void    exitPhoneBook();
 };

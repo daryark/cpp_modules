@@ -6,133 +6,73 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 23:17:18 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/12 12:47:38 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:07:53 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Contact.hpp"
 #include <iostream>
 
-class Log
+bool	nameIsValid(std::string name);
+bool	numberIsValid(std::string number);
+
+Contact::Contact(){};
+
+Contact::~Contact(){};
+
+void Contact::fillContactInfo(Contact &contact)
 {
-  public:
-	enum	Level
-	{
-		LevelError,
-		LevelWarning,
-		LevelInfo
-	};
-    
-	Log()
-	{
-        X = 0;
-        Y = 0;
-		std::cout << "Constructor called" << std::endl;
-	}
-	Log(int x, int y)
-	{
-        X = x;
-        Y = y;
-		std::cout << "Constructor with arguments called" << std::endl;
-	}
-	~Log()
-	{
-		std::cout << "Destructor called" << std::endl;
-	}
 
-  private:
-    int X, Y;
-	Level	m_Loglevel = LevelInfo;
-
-  public:
-	void setLogLevel(Level level)
-	{
-		m_Loglevel = level;
-	}
-
-    void    Print()
-    {
-        std::cout << X << "," << Y << std::endl;
-    }
-	void Error(const char *message)
-	{
-		if (m_Loglevel >= LevelError)
-			std::cout << "[ERROR]:" << message << std::endl;
-	}
-
-	void Warn(const char *message)
-	{
-		if (m_Loglevel >= LevelWarning)
-			std::cout << "[WARNING]:" << message << std::endl;
-	}
-
-	void Info(const char *message)
-	{
-		if (m_Loglevel >= LevelInfo)
-			std::cout << "[INFO]:" << message << std::endl;
-	}
-};
-
-int	main(void)
-{
-	Log	log;
-
-	log.setLogLevel(Log::LevelInfo);
-	log.Warn("Hello");
-	log.Info("Hello");
-	log.Error("Hello");
-    log.Print();
-    Log loglog(4, 444);
-    loglog.Print();
-
-	// std::cin.get();
+	contact.setFieldInfo("First name	", contact.first_name, "name");
+	contact.setFieldInfo("Last name	", contact.last_name, "name");
+	contact.setFieldInfo("Nickname	", contact.nickname, "name");
+	contact.setFieldInfo("Phone number	", contact.phone_number, "number");
+	contact.setFieldInfo("Darkest secret	", contact.darkest_secret, "text");
 }
 
-// #include <iostream>
+void	Contact::setFieldInfo(std::string prompt, std::string &buf, std::string rule)
+{
+	bool valid = true;
 
-// class Log
-// {
-//     public:
-//         enum Level
-//         {
-//             //  0           1              2
-//             LevelError, LevelWarning, LevelInfo
-//         }
+	std::cout << YELLOW << prompt << RE;
+	std::getline(std::cin, buf);
+	if (buf.empty())
+	{
+		std::cout << RED << "No empty fileds accepted!" << RE << std::endl;
+		valid = false;
+	}
+	if (valid)
+	{
+		if (rule == "name")
+			valid = nameIsValid(buf);
+		else if (rule == "number")
+			valid = numberIsValid(buf);
+	}
+	if (!valid)
+		setFieldInfo(prompt, buf, rule);
+}
 
-//     private:
-//         Level m_LogLevel = LevelInfo;
+std::string	Contact::getFirstName()
+{
+	return (this->first_name);
+}
 
-//     public:
-//         void setLogLevel(Level level)
-//         {
-//             m_LogLevel = level;
-//         }
+std::string	Contact::getLastName()
+{
+	return (this->last_name);
+}
 
-//         void Error(const char *message)
-//         {
-//             if (m_LogLevel >= LevelError)
-//                 std::cout << "[ERROR]:" << message << std::endl;
-//         }
+std::string	Contact::getNickname()
+{
+	return (this->nickname);
+}
 
-//         void Warn(const char *message)
-//         {
-//             if (m_LogLevel >= LevelWarning)
-//                 std::cout << "[WARNING]:" << message << std::endl;
-//         }
+std::string	Contact::getPhoneNumber()
+{
+	return (this->phone_number);
+}
 
-//         void Info(const char *message)
-//         {
-//             if (m_LogLevel >= LevelInfo)
-//                 std::cout << "[INFO]:" << message << std::endl;
-//         }
-// };
-
-// int main(void)
-// {
-//     Log log;
-
-//     log.setLogLevel(Level::LevelError);
-//     log.Warn("Hello");
-//     log.Info("Hello");
-//     log.Error("Hello");
-//     // std::cin.get();
-// }
+std::string	Contact::getDarkestSecret()
+{
+	return (this->darkest_secret);
+}

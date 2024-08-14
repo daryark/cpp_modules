@@ -6,51 +6,77 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:43:32 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/12 14:45:57 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:06:45 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <string>
 
-//constructor (define, whatever is needed in the class for start)
+void        printFormatRow(std::string *s, size_t size, std::string color = RE);
+std::string formatStr(std::string s);
+
 PhoneBook::PhoneBook()
 {
-    this->amnt = 0;
-    std::cout << "PhoneBook constructdor called" << std::endl;
+	std::cout << "PhoneBook constructdor called" << std::endl;
 };
 PhoneBook::~PhoneBook()
 {
-    std::cout << "PhoneBook destructor called" << std::endl;
+	std::cout << "PhoneBook destructor called" << std::endl;
 };
-
-// void    PhoneBook::addContact(Contact contact)
-// {
-//     if (this->amnt == 8)
-//         this->amnt = 0;
-//     this->contacts[this->amnt] = contact;
-//     this->amnt++;
-// }
-
-bool PhoneBook::searchContact(unsigned int id)
+void PhoneBook::addContact(size_t *id)
 {
-    if (id < 1 || id > 8)
-        std::cout << "No contact with id: " << id << std::endl;
-    else
-        std::cout << "GET THE CONTACT" << std::endl;
-    return (id >= 1 && id <= 8);
+	Contact	new_contact;
+
+	new_contact.fillContactInfo(new_contact);
+	if ((*id) == PBOOK_LEN)
+		(*id) = 0;
+	this->contacts[(*id)] = new_contact;
+	std::cout << YELLOW << this->contacts[(*id)].first_name << RE << " first name" << std::endl;
+	(*id)++;
 }
 
-
-int main(int ac, char **av)
+void	PhoneBook::printContactById(size_t i)
 {
-    PhoneBook pB;
-    std::string in;
+	std::stringstream ss;
+ 
+	std::string	headers[] = {"Index", "First Name", "Last Name", "Phone number"};
+	printFormatRow(headers, 4, YELLOW);
+	ss << i;
+	std::string contact[] = {ss.str(), this->contacts[i].getFirstName(),
+		this->contacts[i].getLastName(), this->contacts[i].getPhoneNumber()};
+	printFormatRow(contact, 4);
+}
 
-    do
-    {
-        std::cout << "type the command: ADD, SEARCH or EXIT accepted" << std::endl;
-        std::getline(std::cin, in);
-    } while (in == pB.ADD || in == pB.SEARCH || in == pB.DELETE); //ADD = 0, SEARCH = 1, DELETE = 2/ in -> string type!!!
+void PhoneBook::searchContact(size_t id)
+{
+	if (this->contacts[id].getFirstName().empty())
+		std::cout << RED << "No contact with id: " << id << RE << std::endl;
+	else
+		this->printContactById(id);
+}
 
+void PhoneBook::showContacts()
+{
+	std::stringstream ss;
+
+	if (this->contacts[0].getFirstName().empty())
+	{
+		std::cout << RED << "You don't have contacts yet, ADD some."
+			<< RE << std::endl;
+		return ;
+	}
+		std::string	row[] = {"Index", "First Name", "Last Name", "Nickname",
+			"Phone number", "Darkest secret"};
+		printFormatRow(row, 6, YELLOW);
+	for (int i = 0; i < PBOOK_LEN
+		&& !this->contacts[i].getFirstName().empty(); i++)
+	{
+		ss << i;
+		std::string row[] = {ss.str(), this->contacts[i].getFirstName(),
+			this->contacts[i].getLastName(),this->contacts[i].getNickname(),
+			this->contacts[i].getPhoneNumber(), this->contacts[i].getDarkestSecret()};
+		printFormatRow(row, 6);
+		ss.str("");
+        ss.clear();
+	}
 }
