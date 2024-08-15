@@ -1,7 +1,7 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC = PhoneBook.cpp Contact.cpp
+SRC =  main.cpp PhoneBook.cpp Contact.cpp
 HDR = PhoneBook.hpp Contact.hpp
 
 CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
@@ -12,10 +12,10 @@ NAME =  phonebook
 all:$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC_FLAGS) -o $@ $<
-	# @echo "$(GREEN)OK$(RE)"
+	$(CC_FLAGS) -o $@ $^
+	@echo "$(GREEN)OK$(RE)"
 
-%.o:%.cpp $(HDR)
+%.o: %.cpp $(HDR) Makefile
 	$(CC_FLAGS) -c $< -o $@
 
 clean:
