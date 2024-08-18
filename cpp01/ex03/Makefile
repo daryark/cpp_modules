@@ -1,13 +1,13 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC =  main.cpp Zombie.cpp zombieHorde.cpp
-HDR = Zombie.hpp
+SRC =  main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+HDR = Weapon.hpp HumanA.hpp HumanB.hpp
 
 CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
 
 OBJ = $(SRC:.cpp=.o)
-NAME =  zombie
+NAME =  violence
 
 all:$(NAME)
 

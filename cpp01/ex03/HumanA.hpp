@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 15:12:38 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 00:25:48 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/18 23:24:26 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/08/19 00:29:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
+#include "Weapon.hpp"
 
-Zombie::Zombie(): m_name("noname"){};
-
-Zombie::Zombie(std::string name): m_name(name){};
-
-Zombie::~Zombie()
+class HumanA
 {
-    std::cout << m_name << ": destructor called" << std::endl;
+    private:
+        std::string m_name;
+        Weapon      &m_weapon;
+
+    public:
+        HumanA(std::string name, Weapon& weapon);
+        ~HumanA();
+        void    attack();
 };
-
-void    Zombie::announce(void)
-{
-    std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-void    Zombie::setName(std::string name)
-{
-    m_name = name;
-}

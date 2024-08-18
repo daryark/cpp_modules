@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 15:12:38 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 00:25:48 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/18 23:31:27 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/08/19 00:26:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanA.hpp"
 
-Zombie::Zombie(): m_name("noname"){};
-
-Zombie::Zombie(std::string name): m_name(name){};
-
-Zombie::~Zombie()
+HumanA::HumanA(std::string name, Weapon& weapon): m_name(name), m_weapon(weapon)
 {
-    std::cout << m_name << ": destructor called" << std::endl;
-};
-
-void    Zombie::announce(void)
-{
-    std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << YELLOW << "HumanA constructor called, " << RE << m_name << std::endl;
 }
 
-void    Zombie::setName(std::string name)
+HumanA::~HumanA()
 {
-    m_name = name;
+    std::cout << m_name << " destructor called" << std::endl;
+}
+
+void    HumanA::attack()
+{
+    std::cout << m_name << " attacks with their " << m_weapon.getType() << std::endl;
 }
