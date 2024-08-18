@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 21:25:11 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/15 21:48:59 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/15 15:13:04 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/08/15 21:52:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
 
-int main(void)
+class Zombie
 {
-    Zombie  z;
-    z.announce();
-    
-    Zombie *allocated = z.newZombie("Vasya");
-    allocated->announce();
-    delete allocated;
-
-    z.randomChump("random");
-}
+private:
+    std::string name;
+public:
+    Zombie();
+    Zombie(std::string name);
+    ~Zombie();
+    void    announce(void);
+    Zombie* newZombie(std::string name);
+    void    randomChump(std::string name);
+};
