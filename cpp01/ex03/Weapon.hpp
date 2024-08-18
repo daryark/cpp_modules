@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 15:12:38 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 00:25:48 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/18 23:11:05 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/08/18 23:41:03 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
+#include <iostream>
 
-Zombie::Zombie(): m_name("noname"){};
+#define RED "\033[1;31m"
+#define YELLOW "\033[1;33m"
+#define GREEN "\033[1;32m"
+#define RE "\033[;0m"
 
-Zombie::Zombie(std::string name): m_name(name){};
-
-Zombie::~Zombie()
+class Weapon
 {
-    std::cout << m_name << ": destructor called" << std::endl;
+    private:
+        std::string m_type;
+    
+    public:
+        Weapon();
+        Weapon(std::string type);
+        ~Weapon();
+        const std::string&  getType();
+        void                setType(std::string type);
 };
-
-void    Zombie::announce(void)
-{
-    std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-void    Zombie::setName(std::string name)
-{
-    m_name = name;
-}

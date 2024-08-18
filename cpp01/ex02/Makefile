@@ -1,13 +1,12 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC =  main.cpp Zombie.cpp zombieHorde.cpp
-HDR = Zombie.hpp
+SRC =  main.cpp
 
 CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
 
 OBJ = $(SRC:.cpp=.o)
-NAME =  zombie
+NAME =  brain
 
 all:$(NAME)
 
@@ -15,7 +14,7 @@ $(NAME): $(OBJ)
 	$(CC_FLAGS) -o $@ $^
 	@echo "$(GREEN)OK$(RE)"
 
-%.o: %.cpp $(HDR) Makefile
+%.o: %.cpp Makefile
 	$(CC_FLAGS) -c $< -o $@
 
 clean:
