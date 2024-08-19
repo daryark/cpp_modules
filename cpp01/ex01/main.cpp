@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 21:13:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:53:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int main(void)
     int         N;
     std::string name;
 
-    std::cout << YELLOW;
+    std::cout << YELLOW << "<number> <name>:    " << RE;
     std::getline(std::cin, in);
     if (std::cin.eof())
             exit(0);
-    std::cout << RE;
     std::istringstream iss(in);
     if (!(iss >> N) || !(iss >> name))
     {

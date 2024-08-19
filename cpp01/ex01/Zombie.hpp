@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:13:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:47:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #define RED "\033[1;31m"
 #define YELLOW "\033[1;33m"
 #define RE "\033[;0m"
-
-
 
 class Zombie
 {
