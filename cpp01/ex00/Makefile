@@ -1,5 +1,4 @@
 GREEN = \033[0;32m
-RED = \033[0;31m
 RE = \033[0m
 
 SRC =  main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
@@ -21,12 +20,9 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
-	@echo "$(RED)clean$(RE)"
 
 fclean:	clean
 	@rm -f $(NAME)
-	@echo "$(RED)fclean$(RE)"
-
 
 re:	fclean all
 
