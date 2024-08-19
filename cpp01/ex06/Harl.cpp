@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:16:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 15:51:43 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:04:37 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,18 @@ void    Harl::Error()
 
 void    Harl::complain(std::string level)
 {
-    void (Harl::*fn[4])() = {&Harl::Debug, &Harl::Info, &Harl::Warning, &Harl::Error};
+    bool        print = false;
+    void        (Harl::*fn[4])() = {&Harl::Debug, &Harl::Info, &Harl::Warning, &Harl::Error};
     std::string level_arr[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     for (int i = 0; i < 4; i++)
     {
         if (level_arr[i] == level)
-        {
+            print = true;
+        if (print)
             (this->*fn[i])();
-            return ;
-        }
     }
-    std::cout << GREY << "[UNKNOWN TYPE ERROR]" << RE << std::endl
-    << "Harl disappointed, burger shop disappeared from the map, who to complain now?!\n\n";
 }
 
 // return type; (class method::*fn[4])(takes void params)
 // void (Harl::*fn[4])() = ....
+
