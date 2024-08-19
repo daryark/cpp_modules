@@ -1,12 +1,13 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC =  main.cpp
+SRC =  main.cpp Harl.cpp
+HDR = Harl.hpp
 
 CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
 
 OBJ = $(SRC:.cpp=.o)
-NAME =  stringReplace
+NAME =  harlFilter
 
 all:$(NAME)
 
@@ -14,7 +15,7 @@ $(NAME): $(OBJ)
 	$(CC_FLAGS) -o $@ $^
 	@echo "$(GREEN)OK$(RE)"
 
-%.o: %.cpp Makefile
+%.o: %.cpp $(HDR) Makefile
 	$(CC_FLAGS) -c $< -o $@
 
 clean:
@@ -22,7 +23,6 @@ clean:
 
 fclean:	clean
 	@rm -f $(NAME)
-	@rm -f *.replace
 
 re:	fclean all
 

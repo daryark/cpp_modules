@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 15:13:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:09 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/19 14:16:33 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/08/19 15:49:49 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
-#include <sstream>
 
 #define RED "\033[1;31m"
 #define YELLOW "\033[1;33m"
+#define GREEN "\033[1;32m"
+#define BLUE "\033[1;34m"
+#define GREY "\033[1;30m"
 #define RE "\033[;0m"
 
-
-
-class Zombie
+class Harl
 {
-private:
-    std::string m_name;
-public:
-    Zombie();
-    Zombie(std::string name);
-    ~Zombie();
-    void                announce(void);
-    const std::string&  getName();
-    void                setName(std::string name);
-};
+  private:
+    void    Debug();
+    void    Info();
+    void    Warning();
+    void    Error();
 
-Zombie* zombieHorde(int N, std::string name);
+  public:
+	Harl();
+	~Harl();
+    void    complain(std::string level);
+};
