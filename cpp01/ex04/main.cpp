@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 01:00:59 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 02:45:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:08:58 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,34 @@ int main(int ac, char **av)
 {
     if (ac != 4)
         return (printError("structure"));
-    std::ifstream inFile(av[1]);
-    if (!inFile.is_open())
+    std::ifstream in_file(av[1]);
+
+    if (!in_file.is_open())
         return (printError("file"));
+    
     std::string s1 = av[2];
     std::string s2 = av[3];
     std::string file = av[1];
-    std::string outFile = file + ".replace";
+    
     std::string in_line;
     std::string out_line;
-    while (std::getline(inFile, in_line))
+    size_t pos;
+    
+    std::string out_name = file + ".replace";
+    std::ofstream out_file(out_name.c_str());
+
+    while (std::getline(in_file, in_line))
     {
-        if (in_line.find(s1))
-            out_line = in_line.copy((char *)in_line.c_str(), in_line.length());
-        std::cout << out_line << std::endl;
-        //outFile += out_line
+        out_line = in_line;
+        pos = out_line.find(s1);
+        while (pos != std::string::npos)
+        {
+            out_line = out_line.substr(0, pos) + s2 + out_line.substr(pos + s1.length());
+            pos = out_line.find(s1, pos + s2.length());
+        }
+        out_file << out_line << std::endl;
     }
-    // file.close();
+    out_file.close();
+    in_file.close();
     return (0);
 }
