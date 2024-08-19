@@ -5,40 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 21:13:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:18 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/19 15:38:41 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/08/19 16:23:45 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Harl.hpp"
 #include <cstdlib>
 
+
+//!NOT DONE
 int main(void)
 {
     std::string in;
-    int         N;
-    std::string name;
+    Harl harl;
 
-    std::cout << YELLOW;
-    std::getline(std::cin, in);
-    if (std::cin.eof())
+    while (true)
+    {
+        std::cout << "Harl complain level (DEBUG, INRO, WARNING, ERROR):    ";
+        getline(std::cin, in);
+        if (std::cin.eof())
             exit(0);
-    std::cout << RE;
-    std::istringstream iss(in);
-    if (!(iss >> N) || !(iss >> name))
-    {
-        std::cerr << RED << "Expected input format <number> <name>" << RE << std::endl;
-        return (1);
+        if (in == "EXIT")
+            break ;
+        harl.complain(in);
     }
-    if (N <= 0)
-    {
-        std::cerr << RED << "Only positive number amount and name string"
-            << RE << std::endl;
-        return (1);
-    }
-    Zombie *zombies = zombieHorde(N, name);
-    for(int i = 0; i < N; i++)
-        zombies[i].announce();
-    delete []zombies;
     return (0);
 }
