@@ -6,56 +6,78 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:47:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/23 20:22:12 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:31:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
-{
-    this->fixed = 0;
-    std::cout << GREEN << "Default constructor called" << RE << std::endl;
-}
+//Constructors
+Fixed::Fixed(): fixed(0){}
 
 Fixed::Fixed(const int num)
 {
-    // this->fixed = num * pow(2, this->bits); //2^8 (2^this->bits) // 256// - the same as num << bits
     this->fixed = num << this->bits;
-    std::cout << GREEN << "Int constructor called" << RE << std::endl;
 }
-
 Fixed::Fixed(const float num)
 {
-    //this->fixed = round(num * pow(2 * this->bits)) // 256-decimal == 10000000-binary // the same, but bitwize op. faster for computer
-    this->fixed = round(num * (1 << this->bits));
-    std::cout << GREEN << "Float constructor called" << RE << std::endl;
+    this->fixed = roundf(num * (1 << this->bits));
 }
 
-Fixed::~Fixed()
-{
-    std::cout << RED << "Destructor called" << RE << std::endl;
-}
+Fixed::~Fixed(){}
 
 Fixed::Fixed(const Fixed& other)
 {
-    std::cout << YELLOW << "Copy constructor called" << RE << std:: endl;
     *this = other;
 }
 
+// comparison operators: < > >= <= == !=
 Fixed& Fixed::operator=(const Fixed& other)
 {
-    std::cout << YELLOW << "Copy assignment operator called" << RE << std::endl;
     if (this != &other)
         this->fixed = other.getRawBits();
     return (*this);
 }
 
+// Fixed&  Fixed::operator>(const Fixed& other)
+// {
+    
+// }
+
+//arithmetic operators: + - * /
+////
+
+ //increment/decrement:  i++ i-- ++i --i
+ ////
+
+//overloading to os
 std::ostream&   operator<<(std::ostream &os, const Fixed& instance)
 {
     return (os << instance.toFloat());
 }
 
+static Fixed&   min(Fixed& obj1, Fixed& obj2)
+{
+    return (obj1 < obj2 ? obj1 : obj2);
+}
+
+//Comparison min/max
+static const Fixed&   min(const Fixed& obj1, const Fixed& obj2)
+{
+    return (obj1 < obj2 ? obj1 : obj2);
+}
+
+static Fixed&   max(Fixed& obj1, Fixed& obj2)
+{
+    return (obj1 > obj2 ? obj1 : obj2);
+}
+
+static const Fixed&   max(const Fixed& obj1, const Fixed& obj2)
+{
+    return (obj1 > obj2 ? obj1 : obj2);
+}
+
+//other methods
 int    Fixed::getRawBits(void) const
 {
     return (this->fixed);
@@ -68,12 +90,10 @@ void    Fixed::setRawBits(int const raw)
 
 float   Fixed::toFloat(void) const
 {
-    // return (this->fixed * pow(2, -(this->bits)));
-    return (round(this->fixed) / (1 << this->bits));
+    return (roundf(this->fixed) / (1 << this->bits));
 }
 
 int   Fixed::toInt(void) const
 {
-    // return (this->fixed / (1 << this->bits));
     return (this->fixed >> this->bits);
 }

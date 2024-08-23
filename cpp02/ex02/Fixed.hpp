@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:46:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/23 19:55:55 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:30:37 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,31 @@ class Fixed
         ~Fixed();
         Fixed(const Fixed& other);
         Fixed&          operator=(const Fixed& other);
+    
+    // comparison operators: < > >= <= == !=
+        Fixed&          operator>(const Fixed& other);
+        Fixed&          operator<(const Fixed& other);
+        Fixed&          operator>=(const Fixed& other);
+        Fixed&          operator<=(const Fixed& other);
+        Fixed&          operator==(const Fixed& other);
+        Fixed&          operator!=(const Fixed& other);
+
+    //arithmetic operators: + - * /
+        Fixed&          operator+(cons Fixed& other);
+        Fixed&          operator-(cons Fixed& other);
+        Fixed&          operator*(cons Fixed& other);
+        Fixed&          operator/(cons Fixed& other);
+
+    //increment/decrement:  i++ i-- ++i --i
+        Fixed&          operator++();
+        Fixed&          operator--();
+        Fixed&          operator++(int);
+        Fixed&          operator--(int);
+    
+        static Fixed&   min(Fixed& obj1, Fixed& obj2) const;
+        static const Fixed&   min(const Fixed& obj1, const Fixed& obj2) const;
+        static Fixed&   max(Fixed& obj1, Fixed& obj2) const;
+        static const Fixed&   max(const Fixed& obj1, const Fixed& obj2) const;
         int             getRawBits(void) const;
         void            setRawBits(int const raw);
         float           toFloat(void) const;
