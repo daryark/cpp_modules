@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:46:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/22 22:06:46 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:13:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 class Fixed
 {
     private:
-        int val;
+        int fixed;
         static const int bits = 8;
     public:
         Fixed();
