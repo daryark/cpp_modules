@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:47:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/23 23:31:08 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:33:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,9 @@
 //Constructors
 Fixed::Fixed(): fixed(0){}
 
-Fixed::Fixed(const int num)
-{
-    this->fixed = num << this->bits;
-}
-Fixed::Fixed(const float num)
-{
-    this->fixed = roundf(num * (1 << this->bits));
-}
+Fixed::Fixed(const int num): fixed(num << this->bits){}
+
+Fixed::Fixed(const float num): fixed(roundf(num * (1 << this->bits))){}
 
 Fixed::~Fixed(){}
 
@@ -31,7 +26,11 @@ Fixed::Fixed(const Fixed& other)
     *this = other;
 }
 
-// comparison operators: < > >= <= == !=
+//*within the same instance of the class it's better to use direct access: this->fixed
+//*to not make extra call of the getter fn.
+//*to the other instance we access with getter to not violate the rule of incapsulation: other.getRawBits()
+//*🔽
+// comparison operators: =  < > >= <= == !=
 Fixed& Fixed::operator=(const Fixed& other)
 {
     if (this != &other)
@@ -39,43 +38,115 @@ Fixed& Fixed::operator=(const Fixed& other)
     return (*this);
 }
 
-// Fixed&  Fixed::operator>(const Fixed& other)
-// {
-    
-// }
+bool  Fixed::operator>(const Fixed& other)
+{
+    return (this->fixed > other.getRawBits());
+}
+
+bool  Fixed::operator<(const Fixed& other)
+{
+    return (this->fixed < other.getRawBits());
+}
+
+bool  Fixed::operator>=(const Fixed& other)
+{
+    return (this->fixed >= other.getRawBits());
+}
+
+bool  Fixed::operator<=(const Fixed& other)
+{
+    return (this->fixed <= other.getRawBits());
+}
+
+bool  Fixed::operator==(const Fixed& other)
+{
+    return (this->fixed == other.getRawBits());
+}
+
+bool  Fixed::operator!=(const Fixed& other)
+{
+    return (!(*this == other));
+}
 
 //arithmetic operators: + - * /
-////
+//*here we need to add standard types and so then 
+//*we put result num to copy constructor of new instance
+//*where it transferred to fixed again, inside.
+Fixed  Fixed::operator+(const Fixed& other)
+{
+    return (Fixed(this->toFloat() + other.toFloat()));
+}
+
+Fixed  Fixed::operator-(const Fixed& other)
+{
+    return (Fixed(this->toFloat() - other.toFloat()));
+}
+
+Fixed  Fixed::operator*(const Fixed& other)
+{
+    return (Fixed(this->toFloat() * other.toFloat()));
+}
+
+Fixed  Fixed::operator/(const Fixed& other)
+{
+    return (Fixed(this->toFloat() / other.toFloat()));
+}
 
  //increment/decrement:  i++ i-- ++i --i
- ////
+ //*adds 1 bit, not 1.0 real num to the float/int value when converted back
+ //* in that case to add real 1.0 you add 2^this->bits = 2^8 = 256
+ Fixed&     Fixed::operator++()
+ {
+    ++this->fixed;
+    return  (*this);
+ }
 
-//overloading to os
+ Fixed      Fixed::operator++(int)
+ {
+    Fixed   tmp(*this);
+    this->fixed++;
+    return  (tmp);
+ }
+
+ Fixed&     Fixed::operator--()
+ {
+    --this->fixed;
+    return  (*this);
+ }
+
+ Fixed     Fixed::operator--(int)
+ {
+    Fixed   tmp(*this);
+    this->fixed--;
+    return  (tmp);
+ }
+
+//overloading to output
 std::ostream&   operator<<(std::ostream &os, const Fixed& instance)
 {
     return (os << instance.toFloat());
 }
 
-static Fixed&   min(Fixed& obj1, Fixed& obj2)
-{
-    return (obj1 < obj2 ? obj1 : obj2);
-}
-
 //Comparison min/max
-static const Fixed&   min(const Fixed& obj1, const Fixed& obj2)
-{
-    return (obj1 < obj2 ? obj1 : obj2);
-}
+// static Fixed&   min(Fixed& obj1, Fixed& obj2)
+// {
+//     return (obj1 < obj2 ? obj1 : obj2);
+// }
 
-static Fixed&   max(Fixed& obj1, Fixed& obj2)
-{
-    return (obj1 > obj2 ? obj1 : obj2);
-}
+// static const Fixed&   min(const Fixed& obj1, const Fixed& obj2)
+// {
+//     return (obj1 < obj2 ? obj1 : obj2);
+// }
 
-static const Fixed&   max(const Fixed& obj1, const Fixed& obj2)
-{
-    return (obj1 > obj2 ? obj1 : obj2);
-}
+// static Fixed&   max(Fixed& obj1, Fixed& obj2)
+// {
+//     return (obj1 > obj2 ? obj1 : obj2);
+// }
+
+// static const Fixed&   max(const Fixed& obj1, const Fixed& obj2)
+// {
+//     return (obj1 > obj2 ? obj1 : obj2);
+// }
 
 //other methods
 int    Fixed::getRawBits(void) const
