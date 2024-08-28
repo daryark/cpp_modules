@@ -6,20 +6,35 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:18:22 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/26 23:40:26 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:40:00 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 #include <sstream>
+#include <cstdlib>
+
+static std::string  getlineSafe()
+{
+    std::string input;
+    getline(std::cin, input);
+    if (std::cin.eof())
+        exit(0);
+    return (input);
+}
+
+static void cleanConsole()
+{
+    if (!std::system("cls"))
+        return ;
+    std::cout << "\033[2J\033[1;1H";
+}
 
 static Point getInPoint(std::string name)
 {
     std::string input;
     std::cout << YELLOW << name << ":  " << RE;
-    getline(std::cin, input);
-    if (std::cin.eof())
-        exit(0);
+    input = getlineSafe();
     size_t pos = input.find(",");
     if (pos != std::string::npos)
         input.erase(pos, 1).insert(pos, " ");
@@ -28,47 +43,99 @@ static Point getInPoint(std::string name)
     int x, y;
     if (!(ss >> x >> y))
     {
-        std::cerr << "Invalid input, please enter two integers in each point: <int int>."
-        << std::endl;
+        std::cerr << RED << "Invalid input, please enter two integers in each point: <int int>."
+         << RE << std::endl;
         getInPoint(name);
     }
     return (Point (x, y));
     
 }
+static void showRes(bool res)
+{
+    std::cout << (res ?  GREEN "YES" : RED "NO") << RE << std::endl;
+}
 
-int main( void ) {
-    // bool    res;
-    // while (true)
-    // {
-    //     std::cout << BLUE << "Enter points: A, B, C and P to find. input <int[ ,]int>"
-    //     << RE << std::endl;
-    //     res = bsp(getInPoint("C"), getInPoint("B"), getInPoint("A"), getInPoint("P"));
-    //     std::cout << (res ?  GREEN "YES" : RED "NO") << RE << std::endl;
-    // }
-    // return 0;
-     Point A(0.0f, 0.0f);
+static void showInData(const Point &A, const Point&B, const Point& C, const Point& P)
+{
+    std::cout << " A(" << A.getX() << ", " << A.getY() << "), B(" << B.getX() << ", " << B.getY() << "), C(" << C.getX() << ", " << C.getY() << ").   P(" << P.getX() << ", " << P.getY() << ")   " << std::endl;
+}
+
+static void manualMode()
+{
+    std::string in;
+    while (true)
+    {
+        cleanConsole();
+        std::cout << BLUE << "Enter points: A, B, C and P to find. input <int[ ,]int>"
+        << RE << std::endl;
+        showRes(bsp(getInPoint("C"), getInPoint("B"), getInPoint("A"), getInPoint("P")));
+        in = getlineSafe();
+        if (in == "q")
+            exit(0);
+        else if (in != "")
+            return ;
+    }
+}
+
+static void testMode()
+{
+    cleanConsole();
+    Point A(0.0f, 0.0f);
     Point B(5.0f, 0.0f);
     Point C(0.0f, 5.0f);
 
-    Point P1(1.0f, 1.0f); // внутри треугольника        true
-    Point P2(6.0f, 6.0f); // вне треугольника           false
-    Point P3(0.0f, 0.0f); // на вершине треугольника    false
-    Point P4(2.5f, 2.5f); // на линии треугольника      false
-    Point P5(3.0f, 0.0f); // на ребре AB                false
-    Point P6(1.0f, 4.0f); // вне треугольника           false
-    Point P7(2.5f, 1.25f); // внутри треугольника       true
-    Point P8(5.0f, 5.0f); // вне треугольника           false
-    Point P9(-1.0f, -1.0f); // вне треугольника         false
-    Point P10(0.0f, 2.5f); // на линии CA               false
+    // C = B;
+    // std::cout << "address B:    " << &B << "|   " << B.getX() << "  " << B.getY() << std::endl;
+    // std::cout << "address C:    " << &C << "|   " << C.getX() << "  " << C.getY() << std::endl;
+    Point P1(1.0f, 1.0f); // inside        true
+    Point P2(6.0f, 6.0f); // outside       false
+    Point P3(0.0f, 0.0f); // on point A    false
+    Point P4(2.5f, 2.5f); // on side BC    false
+    Point P5(3.0f, 0.0f); // on side AB    false
+    Point P6(1.0f, 4.0f); // outside       false
+    Point P7(2.5f, 1.25f); // inside       true
+    Point P8(5.0f, 5.0f); // outside       false
+    Point P9(-1.0f, -1.0f); // outside     false
+    Point P10(0.0f, 2.5f); // on side CA   false
 
-    std::cout << "P1 inside triangle ABC: " << (bsp(A, B, C, P1) ? "True" : "False") << std::endl;
-    std::cout << "P2 inside triangle ABC: " << (bsp(A, B, C, P2) ? "True" : "False") << std::endl;
-    std::cout << "P3 inside triangle ABC: " << (bsp(A, B, C, P3) ? "True" : "False") << std::endl;
-    std::cout << "P4 inside triangle ABC: " << (bsp(A, B, C, P4) ? "True" : "False") << std::endl;
-    std::cout << "P5 inside triangle ABC: " << (bsp(A, B, C, P5) ? "True" : "False") << std::endl;
-    std::cout << "P6 inside triangle ABC: " << (bsp(A, B, C, P6) ? "True" : "False") << std::endl;
-    std::cout << "P7 inside triangle ABC: " << (bsp(A, B, C, P7) ? "True" : "False") << std::endl;
-    std::cout << "P8 inside triangle ABC: " << (bsp(A, B, C, P8) ? "True" : "False") << std::endl;
-    std::cout << "P9 inside triangle ABC: " << (bsp(A, B, C, P9) ? "True" : "False") << std::endl;
-    std::cout << "P10 inside triangle ABC: " << (bsp(A, B, C, P10) ? "True" : "False") << std::endl;
+    showInData(A, B, C, P1);
+    showRes(bsp(A, B, C, P1));
+    showInData(A, B, C, P2);
+    showRes(bsp(A, B, C, P2));
+    showInData(A, B, C, P3);
+    showRes(bsp(A, B, C, P3));
+    showInData(A, B, C, P4);
+    showRes(bsp(A, B, C, P4));
+    showInData(A, B, C, P5);
+    showRes(bsp(A, B, C, P5));
+    showInData(A, B, C, P6);
+    showRes(bsp(A, B, C, P6));
+    showInData(A, B, C, P7);
+    showRes(bsp(A, B, C, P7));
+    showInData(A, B, C, P8);
+    showRes(bsp(A, B, C, P8));
+    showInData(A, B, C, P9);
+    showRes(bsp(A, B, C, P9));
+    showInData(A, B, C, P10);
+    showRes(bsp(A, B, C, P10));
+    std::cout << "Press any button to go in menu" << std::endl;
+    if (getlineSafe() == "q")
+        exit(0);
+}
+
+int main( void ) {
+    std::string in;
+    while (true)
+    {
+        cleanConsole();
+        std::cout << BLUE << "Choose mode: t - test, m - manual, q - quit program" << RE << std::endl;
+        in = getlineSafe();
+         if (in == "t")
+            testMode();
+        else if (in == "m")
+            manualMode();
+        else if (in == "q")
+            exit (0);
+    }
+    return 0;
 }
