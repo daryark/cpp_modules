@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:18:22 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/28 17:40:00 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:09:38 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static Point getInPoint(std::string name)
         input.erase(pos, 1).insert(pos, " ");
     std::stringstream ss;
     ss << input;
-    int x, y;
+    float x, y;
     if (!(ss >> x >> y))
     {
-        std::cerr << RED << "Invalid input, please enter two integers in each point: <int int>."
+        std::cerr << RED << "Invalid input, please enter two integers in each point: <num[ ,]num>, num - int/float."
          << RE << std::endl;
         getInPoint(name);
     }
@@ -66,7 +66,7 @@ static void manualMode()
     while (true)
     {
         cleanConsole();
-        std::cout << BLUE << "Enter points: A, B, C and P to find. input <int[ ,]int>"
+        std::cout << BLUE << "Enter points: A, B, C and P to find. input <num[ ,]num>, num - int/float"
         << RE << std::endl;
         showRes(bsp(getInPoint("C"), getInPoint("B"), getInPoint("A"), getInPoint("P")));
         in = getlineSafe();
