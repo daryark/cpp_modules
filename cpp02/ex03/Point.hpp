@@ -6,10 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 17:10:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/28 17:03:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:40:44 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "Fixed.hpp"
 
 class Point
