@@ -6,13 +6,14 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:18:22 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/28 18:09:38 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/08/29 21:20:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 #include <sstream>
 #include <cstdlib>
+#include <cstdio>
 
 static std::string  getlineSafe()
 {
@@ -41,7 +42,7 @@ static Point getInPoint(std::string name)
     std::stringstream ss;
     ss << input;
     float x, y;
-    if (!(ss >> x >> y))
+    if (!(ss >> x >> y) || ss.peek() != EOF )
     {
         std::cerr << RED << "Invalid input, please enter two integers in each point: <num[ ,]num>, num - int/float."
          << RE << std::endl;
