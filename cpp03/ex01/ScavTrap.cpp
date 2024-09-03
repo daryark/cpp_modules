@@ -1,23 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 21:23:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/29 22:02:33 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/08/31 18:04:38 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/09/03 16:52:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-
-int main(void)
-{
-    ClapTrap Vayne("Vayne");
-    Vayne.attack("Nick");
-    Vayne.beRepaired(4);
-    Vayne.attack("Nick");
-    Vayne.takeDamage(5);
-    return(0);
-}
+#include "ScavTrap.hpp"
