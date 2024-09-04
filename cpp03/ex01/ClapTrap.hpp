@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/03 16:47:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:25:56 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ private:
     unsigned int        _energy;
     const unsigned int  _attack;
 public:
+    ClapTrap();
     ClapTrap(std::string name);
     ~ClapTrap();
-    void        attack(const std::string& target);
-    void        takeDamage(unsigned int amount);
-    void        beRepaired(unsigned int amount);
+    void                attack(const std::string& target);
+    void                takeDamage(unsigned int amount);
+    void                beRepaired(unsigned int amount);
+    //? do i need getter and setter for this class ??
+    const std::string&  getName();
+    void                setName(std::string& s);
 };

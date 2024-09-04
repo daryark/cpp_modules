@@ -7,7 +7,7 @@ HDR = ClapTrap.hpp ScavTrap.hpp
 CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
 
 OBJ = $(SRC:.cpp=.o)
-NAME =  ClapTrap
+NAME =  ScavTrap
 
 all:$(NAME)
 
