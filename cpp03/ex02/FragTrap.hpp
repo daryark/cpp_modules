@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 21:23:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 22:55:55 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/09/07 21:30:39 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/09/07 22:08:24 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "ClapTrap.hpp"
 
-int main(void)
+class FragTrap
 {
-    ClapTrap Vayne("Vayne");
-    ClapTrap Tim("Tim");
-    Tim = Vayne;
-    ClapTrap Greg(Tim);
-    Greg.attack("Yoohoo");
-    Tim.attack("Valleee");
-    Tim.stats();
-    Vayne.stats();
-    Vayne.attack("Nick");
-    Vayne.beRepaired(4);
-    Vayne.attack("Nick");
-    Vayne.takeDamage(5);
-    Vayne.takeDamage(14);
-    Vayne.attack("Bro");
-    Vayne.beRepaired(2);
-    Vayne.takeDamage(14);
-    return(0);
-}
+private:
+    /* data */
+public:
+    FragTrap();
+    FragTrap(std::string name);
+    ~FragTrap();
+    FragTrap(const FragTrap& other);
+    FragTrap&   operator=(const FragTrap& other);
+    void    highFivesGuys(void);
+};

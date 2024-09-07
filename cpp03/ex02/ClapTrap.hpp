@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 22:40:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:19:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 class ClapTrap
 {
-private:
+protected:
     std::string         _name;
     unsigned int        _health; //hit points
     unsigned int        _energy;
