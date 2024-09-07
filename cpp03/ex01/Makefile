@@ -4,7 +4,7 @@ RE = \033[0m
 SRC =  main.cpp ClapTrap.cpp ScavTrap.cpp
 HDR = ClapTrap.hpp ScavTrap.hpp
 
-CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
+CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -Wshadow -pedantic -O3 -g
 
 OBJ = $(SRC:.cpp=.o)
 NAME =  ScavTrap

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/08/29 21:57:25 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:16:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ class ClapTrap
 {
 private:
     std::string         _name;
-    unsigned int        _health;
+    unsigned int        _health; //hit points
     unsigned int        _energy;
     const unsigned int  _attack;
+    bool                checkPrintDead() const;
 public:
+    ClapTrap();
     ClapTrap(std::string name);
     ~ClapTrap();
-    void        attack(const std::string& target);
-    void        takeDamage(unsigned int amount);
-    void        beRepaired(unsigned int amount);
+    ClapTrap(const ClapTrap& other);
+    ClapTrap&           operator=(const ClapTrap& other);
+    void                attack(const std::string& target);
+    void                takeDamage(unsigned int amount);
+    void                beRepaired(unsigned int amount);
+    void                stats() const;
 };

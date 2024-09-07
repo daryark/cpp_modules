@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:05:41 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/04 16:21:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:19:01 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ class ScavTrap: public ClapTrap
         ScavTrap();
         ScavTrap(std::string name);
         ~ScavTrap();
-    private:
-        void    print();
+        void        attack(const std::string &target);
+        void        guardGate();
 };
