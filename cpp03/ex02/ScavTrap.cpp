@@ -6,12 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:04:38 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 22:17:35 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/07 23:14:49 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
-#include "ClapTrap.hpp"
 
 ScavTrap::ScavTrap()
 {
@@ -37,22 +36,26 @@ ScavTrap::~ScavTrap()
     << " destructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& other):ClapTrap(other)
+ScavTrap::ScavTrap(const ScavTrap& other):  ClapTrap(other._name)
 {
-    std::cout << BLUE << "ScavTrap" << RE << "copy constructor called" << std::endl;
+    *this = other;
+    std::cout << BLUE << "ScavTrap" << RE
+    << " copy constructor called" << std::endl;
 }
 
 ScavTrap&   ScavTrap::operator=(const ScavTrap& other)
 {
     if (this != &other)
         ClapTrap::operator=(other);
-    std::cout << BLUE << "ScavTrap" << RE << " copy assignment operator called" << std::endl;
+    std::cout << BLUE << "ScavTrap" << RE
+    << " copy assignment operator called" << std::endl;
     return (*this);
 }
 
 void    ScavTrap::guardGate()
 {
-    std::cout << "Scav Trap " << _name << " is now in Gate keeper mode!" << std::endl;
+    std::cout << BLUE << "ScavTrap " << RE
+    << _name << " is now in Gate keeper mode!" << std::endl;
 }
 
 void    ScavTrap::attack(const std::string& target)
@@ -60,7 +63,7 @@ void    ScavTrap::attack(const std::string& target)
     if (checkPrintDead())
         return ;
     _energy--;
-    std::cout << "ScavTrap " << _name << " attacks " << target
-    << " causing " << _attack << " points of damage!"
+    std::cout << BLUE << "ScavTrap " << RE << _name << " attacks "
+    << target << " causing " << _attack << " points of damage!"
     << YELLOW << "  ( -1 ⚡)" << RE << std::endl;
 }
