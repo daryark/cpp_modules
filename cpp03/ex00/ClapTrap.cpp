@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:26 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 17:47:04 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/07 22:54:24 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap(): _name("noname"), _health(10), _energy(10), _attack(0)
 {
-    std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
+    std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name): _name(name), _health(10), _energy(10), _attack(0)
@@ -30,6 +30,7 @@ ClapTrap::~ClapTrap()
 //copy constructor
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
+    std::cout << "ClapTrap copy constructor called" << std::endl;
     *this = other;
 }
 
@@ -39,10 +40,11 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
     if (this != &other)
     {
         this->_name = other._name;
-        this->_name = other._energy;
-        this->_name = other._health;
-        this->_name = other._attack;
+        this->_energy = other._energy;
+        this->_health = other._health;
+        this->_attack = other._attack;
     }
+    std::cout << "ClapTrap copy assignment operator called" << std::endl; 
     return (*this);
 }
 
