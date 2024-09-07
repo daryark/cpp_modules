@@ -6,38 +6,98 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:26 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/04 16:29:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:47:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap(): _name("noname"), _health(10), _energy(10), _attack(0)
+{
+    std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name): _name(name), _health(10), _energy(10), _attack(0)
 {
-    std::cout << BLUE << "ClapTrap " << RE << _name << " constructor called" << std::endl;
+    std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << BLUE << "ClapTrap " << RE << _name << " destructor called" << std::endl;
+    std::cout << "ClapTrap " << _name << " destructor called" << std::endl;
+}
+
+//copy constructor
+ClapTrap::ClapTrap(const ClapTrap& other)
+{
+    *this = other;
+}
+
+//copy assignment operator
+ClapTrap& ClapTrap::operator=(const ClapTrap& other)
+{
+    if (this != &other)
+    {
+        this->_name = other._name;
+        this->_name = other._energy;
+        this->_name = other._health;
+        this->_name = other._attack;
+    }
+    return (*this);
 }
 
 void    ClapTrap::attack(const std::string& target)
 {
-    std::cout << BLUE << "ClapTrap " << RE << YELLOW << _name << " attacks " << target
-    << " causing " << _attack << " points of damage!" << RE << std::endl;
+    if (checkPrintDead())
+        return ;
+    _energy--;
+    std::cout << "ClapTrap " << _name << " attacks " << target
+    << " causing " << _attack << " points of damage!"
+    << YELLOW << "  ( -1 ⚡)" << RE << std::endl;
 }
 
 void    ClapTrap::takeDamage(unsigned int amount)
 {
-    this->_energy -= amount;
-    std::cout << BLUE << "ClapTrap " << RE << RED << _name << " takes "
-    << amount << " points of damage!" << RE  << std::endl;
+    if (checkPrintDead())
+        return ;
+    if (_health <= amount)
+    {
+        _health = 0;
+        std::cout << RED;
+    }
+    else
+        _health -= amount;
+    std::cout << "ClapTrap " << _name << " takes "
+    << amount << " points of damage!" << YELLOW;
+    std::cout << "  ( -" << amount << " ⚡)" << RE << std::endl;
 }
 
 void    ClapTrap::beRepaired(unsigned int amount)
 {
-    this->_health += amount;
-    std::cout << BLUE << "ClapTrap " << RE << GREEN << _name << " get "
-    << amount << " health back!" << RE << std::endl;
+    if (checkPrintDead())
+        return ;
+    _energy--;
+    _health += amount;
+    std::cout << "ClapTrap " << _name << " get "
+    << amount << " health back!"
+    << YELLOW << "  ( -1 ⚡)" << RE << std::endl;
+}
+
+bool    ClapTrap::checkPrintDead() const
+{
+    if (_health < 1 || _energy < 1)
+     {
+        std::cout << RED << "ClapTrap " << _name << " is dead" << "    ⭕"
+        << RE << std::endl;
+        return (true);
+     }
+     return (false);
+}
+
+void    ClapTrap::stats() const
+{
+    std::cout << "\nName: " << _name << "|    ";
+    std::cout << "Energy:   " << _energy << "|    ";
+    std::cout << "Health:   " << _health << "|    ";
+    std::cout << "Attack:   " << _attack << "|    " << std::endl << std::endl;
 }
