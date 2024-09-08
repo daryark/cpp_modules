@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:04:38 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 23:14:49 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:24:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 ScavTrap::ScavTrap()
 {
     _health = 100;
-    _energy = 20;
-    _attack = 10;
+    _energy = 50;
+    _attack = 20;
     std::cout << BLUE << "ScavTrap" << RE
     << " default constructor init" << std::endl;
 }
@@ -24,8 +24,8 @@ ScavTrap::ScavTrap()
 ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 {
     _health = 100;
-    _energy = 20;
-    _attack = 10;
+    _energy = 50;
+    _attack = 20;
     std::cout << BLUE << "ScavTrap " << RE << _name
     << " constructor init" << std::endl;
 }
