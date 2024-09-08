@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:26 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 22:56:35 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:26:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ bool    ClapTrap::checkPrintDead() const
 void    ClapTrap::stats() const
 {
     std::cout << "\nName: " << _name << "|    ";
-    std::cout << "Energy:   " << _energy << "|    ";
     std::cout << "Health:   " << _health << "|    ";
+    std::cout << "Energy:   " << _energy << "|    ";
     std::cout << "Attack:   " << _attack << "|    " << std::endl << std::endl;
 }
