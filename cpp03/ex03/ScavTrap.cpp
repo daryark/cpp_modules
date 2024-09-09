@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:04:38 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/08 18:24:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:11:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,9 @@ void    ScavTrap::attack(const std::string& target)
     std::cout << BLUE << "ScavTrap " << RE << _name << " attacks "
     << target << " causing " << _attack << " points of damage!"
     << YELLOW << "  ( -1 ⚡)" << RE << std::endl;
+}
+
+void    ScavTrap::setEnergyDefault()
+{
+    _energy = 50;
 }
