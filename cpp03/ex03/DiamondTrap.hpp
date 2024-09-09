@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:30:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/08 20:36:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:57:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 class DiamondTrap: public ScavTrap, public FragTrap
 {
 private:
-    std::string _name; //it own name; also has ClapTraps' name: name_clap_name
+    std::string     _name;
 public:
-    DiamondTrap(); //in both consturctors: _energy from ScavTrap, _health and _attack from FragTrap
+    DiamondTrap();
     DiamondTrap(std::string name);
     ~DiamondTrap();
     DiamondTrap(const DiamondTrap& other);
     DiamondTrap&    operator=(const DiamondTrap& other);
-    void            attack(const std::string &target); //takes attack from ScavTrap
-    void            whoAmI(); //shows both this names: own and Clap name
+    void            attack(const std::string &target);
+    void            whoAmI();
 };
 

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:05:41 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/08 18:20:30 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:11:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ class ScavTrap: virtual public ClapTrap
         ScavTrap&   operator=(const ScavTrap& other);
         void        attack(const std::string &target);
         void        guardGate();
+    protected:
+        void        setEnergyDefault();
 };
