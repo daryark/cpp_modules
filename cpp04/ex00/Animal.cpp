@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:19 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/10 19:04:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:20:28 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ const std::string&    Animal::getType() const
 
 void    Animal::makeSound() const
 {
-    std::cout << "AnimalSound" << std::endl;
+    std::cout << YELLOW << "AnimalSound" << RE << std::endl;
 }

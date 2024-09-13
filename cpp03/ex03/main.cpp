@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:23:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/09 18:14:46 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:36:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int main(void)
 {
     DiamondTrap Vayne("Vayne");
-    Vayne.stats();
+    stats(Vayne);
     Vayne.whoAmI();
     Vayne.attack("Nick");
-    // DiamondTrap newVayne(Vayne);
-    // newVayne.whoAmI();
-    // newVayne.stats();
-    // DiamondTrap nextVayne("BRO");
-    // nextVayne = newVayne;
-    // nextVayne.whoAmI();
-    // nextVayne.attack("BROOOO");
-    // nextVayne.stats();
+    DiamondTrap newVayne(Vayne);
+    newVayne.whoAmI();
+    stats(newVayne);
+    DiamondTrap nextVayne("BRO");
+    nextVayne = newVayne;
+    nextVayne.whoAmI();
+    nextVayne.attack("BROOOO");
+    stats(nextVayne);
     return(0);
 }

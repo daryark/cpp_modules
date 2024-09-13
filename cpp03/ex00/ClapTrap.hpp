@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:24:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 22:40:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:19:59 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ public:
     void                attack(const std::string& target);
     void                takeDamage(unsigned int amount);
     void                beRepaired(unsigned int amount);
-    void                stats() const;
+    friend void         stats(const ClapTrap& obj);
 };
