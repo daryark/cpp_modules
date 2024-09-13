@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 17:54:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/14 00:26:09 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 Dog::Dog()
 {
     _type = "Dog 🐕";
+    _brain = new Brain();
     std::cout << BLUE << _type << RE
     << " default constructor" << std::endl;
 }
 
 Dog::~Dog()
 {
+    delete _brain;
     std::cout << BLUE << _type <<  RE
     << " destructor" << std::endl;
 }
 
-Dog::Dog(const Dog& other): Animal()
+Dog::Dog(const Dog& other): AAnimal()
 {
     if (this != &other)
         *this = other;
@@ -35,7 +37,14 @@ Dog::Dog(const Dog& other): Animal()
 
 Dog& Dog::operator=(const Dog& other)
 {
-    Animal::operator=(other);
+    if (this != &other)
+    {
+        AAnimal::operator=(other);
+        if (this != &other)
+            *(_brain) = *(other._brain);
+        // std::cout << "address this: " << _brain
+        // << ", address other: " << other._brain << std::endl;
+    }
     std::cout << BLUE << _type << RE
     << " copy assignment operator" << std::endl;
     return (*this);
@@ -46,7 +55,13 @@ void    Dog::makeSound() const
     std::cout << BLUE << "Bark 🐕" << RE << std::endl;
 }
 
-// void    Dog::onlyDogCanDo() const
-// {
-//     std::cout << "only dog can do" << std::endl;
-// }
+void    Dog::getIdeaByIdx(int idx) const
+{
+    std::cout << BLUE << _type << RE << " get and idea:  "
+    << _brain->getIdeaByIdx(idx) << std::endl;
+}
+
+void    Dog::setIdeaByIdx(std::string idea, int idx)
+{
+    _brain->setIdeaByIdx(idea, idx);
+}

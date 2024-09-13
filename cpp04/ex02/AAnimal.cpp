@@ -1,52 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   AAAnimal.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 15:33:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 17:54:44 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/09/10 15:32:19 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/09/13 19:45:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "AAnimal.hpp"
 
-Dog::Dog()
+AAnimal::AAnimal():_type("default_type 👾")
 {
-    _type = "Dog 🐕";
-    std::cout << BLUE << _type << RE
+    std::cout << YELLOW << "AAnimal" << RE
     << " default constructor" << std::endl;
 }
 
-Dog::~Dog()
+AAnimal::~AAnimal()
 {
-    std::cout << BLUE << _type <<  RE
+    std::cout << YELLOW << "AAnimal" <<  RE
     << " destructor" << std::endl;
 }
 
-Dog::Dog(const Dog& other): Animal()
+AAnimal::AAnimal(const AAnimal& other)
 {
     if (this != &other)
         *this = other;
-    std::cout << BLUE << _type << RE
+    std::cout << YELLOW << "AAnimal" << RE
     << " copy constuctor" << std::endl;
 }
 
-Dog& Dog::operator=(const Dog& other)
+AAnimal& AAnimal::operator=(const AAnimal& other)
 {
-    Animal::operator=(other);
-    std::cout << BLUE << _type << RE
+    std::cout << YELLOW << "AAnimal" << RE
     << " copy assignment operator" << std::endl;
+    if (this != &other)
+        _type = other._type;
     return (*this);
 }
 
-void    Dog::makeSound() const
+const std::string&    AAnimal::getType() const
 {
-    std::cout << BLUE << "Bark 🐕" << RE << std::endl;
+    return (_type);
 }
-
-// void    Dog::onlyDogCanDo() const
-// {
-//     std::cout << "only dog can do" << std::endl;
-// }
