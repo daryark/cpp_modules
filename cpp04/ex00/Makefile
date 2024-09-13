@@ -20,7 +20,7 @@ $(OBJ_F)%.o: %.cpp $(HDR) Makefile
 	$(CC_FLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ_F)
+	@rm -rf $(OBJ_F)
 
 fclean:	clean
 	@rm -f $(NAME)

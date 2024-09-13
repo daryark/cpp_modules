@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 21:23:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/07 22:55:55 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:21:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int main(void)
     ClapTrap Greg(Tim);
     Greg.attack("Yoohoo");
     Tim.attack("Valleee");
-    Tim.stats();
-    Vayne.stats();
+    stats(Tim);
+    stats(Vayne);
     Vayne.attack("Nick");
     Vayne.beRepaired(4);
     Vayne.attack("Nick");
