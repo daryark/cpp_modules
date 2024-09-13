@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:32:46 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 15:22:03 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:29:44 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 #define RE "\033[;0m"
 #include <iostream>
 
-class Animal
+class AAnimal
 {
     protected:
         std::string _type;
     public:
-        Animal();
-        virtual ~Animal();
-        Animal(const Animal& other);
-        Animal&             operator=(const Animal& other);
+        AAnimal();
+        virtual ~AAnimal();
+        AAnimal(const AAnimal& other);
+        AAnimal&             operator=(const AAnimal& other);
         const std::string&  getType() const;
-        virtual void        makeSound() const;
+        virtual void        makeSound() const = 0;
 };

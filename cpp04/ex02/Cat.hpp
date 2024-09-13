@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 15:34:10 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 17:54:47 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/09/10 15:34:55 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/09/14 00:26:00 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #pragma once
-#include "Animal.hpp"
+#include "AAnimal.hpp"
+#include "Brain.hpp"
 
-class Dog: public Animal
+class Cat: public AAnimal
 {
-    public:
-        Dog();
-        ~Dog();
-        Dog(const Dog& other);
-        Dog&    operator=(const Dog& other);
-        void makeSound() const;
-        // void onlyDogCanDo() const;
+private:
+    Brain*  _brain;
+public:
+    Cat();
+    ~Cat();
+    Cat(const Cat& other);
+    Cat&    operator=(const Cat& other);
+    void    makeSound() const;
+    void    getIdeaByIdx(int idx) const;
+    void    setIdeaByIdx(std::string idea, int idx);
 };
