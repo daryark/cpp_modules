@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 12:07:41 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/16 10:20:42 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:13:13 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #define INVENTORY_SIZE 4
 
 #include <iostream>
-// #include "ICharacter.hpp"
 #include "AMateria.hpp"
+// #include "ICharacter.hpp"
 
 class ICharacter;
 

@@ -1,8 +1,8 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp
-HDR = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp
+SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
+HDR = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp MateriaSource.hpp IMateriaSource.hpp
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
 OBJ_F = obj/
 

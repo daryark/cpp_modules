@@ -6,16 +6,24 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 22:06:41 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/16 22:07:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 02:53:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "IMateriaSource.hpp"
+#include "AMateria.hpp"
 
-class IMateriaSource
+#define INVENTORY_SIZE 4
+
+class MateriaSource: public IMateriaSource
 {
+private:
+    AMateria*   _inventory[INVENTORY_SIZE];
 public:
-virtual ~IMateriaSource() {}
-virtual void learnMateria(AMateria*) = 0;
-virtual AMateria* createMateria(std::string const & type) = 0;
-}
+    MateriaSource();
+    ~MateriaSource();
+    MateriaSource(const MateriaSource& other);
+    MateriaSource&  operator=(const MateriaSource& other);
+    void            learnMateria(AMateria* m);
+    AMateria*       createMateria(std::string const & type);
+};
