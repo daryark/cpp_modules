@@ -6,19 +6,24 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 11:49:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/17 02:04:49 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:19:25 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "Character.hpp"
+#include "MateriaSource.hpp"
 // #include "AMateria.hpp"
 
 int main(void)
 {
     Ice* ice = new Ice();
     Cure* cure = new Cure();
+    std::cout << "==============created materiasource===============\n";
+    MateriaSource one;
+	MateriaSource two;
+    AMateria* created = NULL;
     std::cout << "==============created me===============\n";
     Character me("ME_1");
     std::cout << me.getName() << std::endl;
@@ -29,6 +34,31 @@ int main(void)
     me.equip(ice); //full
     me.use(3, me); //ice
     me.use(5, me); //no idx
+    std::cout << "==============me use materia===============\n";
+    me.unequip(1); //free slot
+    created = one.createMateria("ice"); //null (no learned materias yet)
+    me.equip(created);//null
+    one.learnMateria(ice); //learn ice
+    created = one.createMateria("cure"); //null (no learned cure)
+    me.equip(created);//null
+    me.equip(NULL); //null
+    one.learnMateria(cure);
+    one.learnMateria(cure);
+    one.learnMateria(cure);
+    one.learnMateria(ice);
+    two.learnMateria(ice);
+    me.equip(created);//1
+    std::cout << "==============materia one is two===============\n";
+    created = one.createMateria("ice"); //created ok
+    one = two; //no materias learned
+    two.createMateria("ice");
+    two.createMateria("cure");
+    two.createMateria("cureeee");
+    me.unequip(2);
+    created = NULL;
+    created = one.createMateria("ice");//null (one is two now, so no ice learned)
+    std::cout << created << std::endl;
+    me.equip(created);//null
     std::cout << "==============created bob===============\n";
     Character bob("BOB_2");
     std::cout << bob.getName() << std::endl;
@@ -37,8 +67,10 @@ int main(void)
     bob.unequip(3); //already empty
     bob.unequip(8); //no idx
     std::cout << "===============me is bob==============\n";
+    bob.equip(cure);//0
     me = bob; // both names now: BOB_2, slots empty as bob had this state
     std::cout << "me " << &me << "  bob " << &bob << std::endl;
+    me = me;
     me.unequip(2); //empty
     std::cout << "=============bob================\n";
     bob.equip(ice); //0
@@ -71,6 +103,8 @@ int main(void)
     std::cout << "=============================\n";
     delete ice;
     delete cure;
+    // delete one;
+    // delete two;
     return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 11:50:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/17 01:56:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:20:11 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@ Character::Character(std::string name): _name(name)
 
 Character::~Character()
 {
-	// for (int i = 0; i < INVENTORY_SIZE; i++)
-	// {
-	// 	if (_inventory[i])
-	// 	{
-	// 		std::cout << GREEN << "cleaned slot " << i << " of " << this->getName() << RE << std::endl;
-	// 		delete _inventory[i];
-	// 	}
-	// }
 	std::cout << MAGENTA << "Character " << RE << "destructor" << std::endl;
 }
 
@@ -49,15 +41,11 @@ Character&  Character::operator=(const Character& other)
 		for (int i = 0; i < INVENTORY_SIZE; i++)
 		{
 			if (_inventory[i])
-			{
-				// delete _inventory[i];
 				_inventory[i] = NULL;
-			}
 			if (other._inventory[i])
 			{
 				_inventory[i] = other._inventory[i];
-				// _inventory[i] = other._inventory[i]->clone();
-				std::cout << "construct inventory on " << i << std::endl;
+				std::cout << "construct inventory on " << i << ", type: ";
 				std::cout << MAGENTA << _inventory[i]->getType() << RE << std::endl;
 			}
 		}
@@ -79,12 +67,16 @@ void    Character::equip(AMateria* m)
     {
 		if (!_inventory[i])
 		{
-			_inventory[i] = m;
-			std::cout << "🎒 equiped No: " << i << std::endl;
+			if (m)
+			{
+				_inventory[i] = m;
+				std::cout << "🎒 equiped No: " << i << std::endl;
+			}
+			else
+				std::cout << RED << "materia* passed is NULL" << RE << std::endl;
 			return ;
 		}
     }
-	// delete m;
 	std::cerr << RED << _name << " inventory is already full" << RE << std::endl;
 }
 
@@ -97,7 +89,6 @@ void    Character::unequip(int idx)
 	}
 	if (_inventory[idx])
 	{
-		// delete _inventory[idx]; //pass them from IMateriaSource
 		_inventory[idx] = NULL;
 		std::cout << "📤 unequiped No:" << idx << std::endl;
 		return ;
