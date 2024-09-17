@@ -1,8 +1,8 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC =  main.cpp AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp IMateriaSource.cpp
-HDR = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp IMateriaSource.hpp
+SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp
+HDR = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
 OBJ_F = obj/
 
@@ -15,8 +15,9 @@ $(NAME): $(OBJ)
 	$(CC_FLAGS) -o $@ $^
 	@echo "$(GREEN)OK$(RE)"
 
-$(OBJ_F)%.o: %.cpp $(HDR) Makefile
+$(OBJ_F)%.o:%.cpp $(HDR) Makefile
 	mkdir -p $(@D)
+	$(info OBJ: $(OBJ))
 	$(CC_FLAGS) -c $< -o $@
 
 clean:

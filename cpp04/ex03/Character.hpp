@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 15:52:00 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/15 21:10:32 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/09/15 12:07:41 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/09/16 10:20:42 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,26 @@
 #define MAGENTA "\033[0;35m"
 #define RE "\033[;0m"
 
+#define INVENTORY_SIZE 4
+
 #include <iostream>
-#include "ICharacter.hpp"
+// #include "ICharacter.hpp"
+#include "AMateria.hpp"
 
 class ICharacter;
-class AMateria
+
+class Character: public ICharacter
 {
-protected:
-    std::string _type;
-public:
-AMateria(const std::string& type);
-virtual ~AMateria();
-AMateria(const AMateria& other);
-AMateria&           operator=(const AMateria& other);
-const std::string&  getType() const; //Returns the materia type
-virtual AMateria*   clone() const = 0;
-virtual void        use(ICharacter& target);
+    private:
+        std::string _name;
+        AMateria*   _inventory[INVENTORY_SIZE];
+    public:
+        Character(std::string name);
+        ~Character();
+        Character(const Character& other);
+        Character&          operator=(const Character& other);
+        const std::string&  getName() const;
+        void                equip(AMateria* m);
+        void                unequip(int idx);
+        void                use(int idx, ICharacter& target);
 };
