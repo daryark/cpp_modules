@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 12:07:41 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/17 02:13:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:27:53 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #include <iostream>
 #include "AMateria.hpp"
 // #include "ICharacter.hpp"
-
 class ICharacter;
 
 class Character: public ICharacter

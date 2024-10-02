@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:22:08 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 23:45:28 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:09:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ Brain& Brain::operator=(const Brain& other)
 
 const std::string    Brain::getIdeaByIdx(int idx) const
 {
-    std::string err = "no idea by that idx" + idx;
+    std::stringstream ss;
+    ss << idx;
+    std::string err = "no idea by that idx" + ss.str();
     if (idx < 0 || idx > 99)
         return (err);
     else

@@ -6,7 +6,7 @@ HDR = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp MateriaSource.h
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
 OBJ_F = obj/
 
-CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow -pedantic -O3 -g
+CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow  -O3 -g
 NAME =  AMateria
 
 all:$(NAME)

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 22:06:22 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/17 03:24:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:28:47 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ MateriaSource::~MateriaSource()
 	{
 		if (_inventory[i])
 		{
-			std::cout << GREEN << "MateriaSource cleaned slot " << i << " of " << this->_inventory[i]->getType() << RE << std::endl;
+			std::cout << GREEN << "MateriaSource cleaned slot " << i << " of "
+            << this->_inventory[i]->getType() << RE << std::endl;
 			delete _inventory[i];
 		}
 	}

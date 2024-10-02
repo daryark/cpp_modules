@@ -6,15 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 22:50:08 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/16 10:17:17 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:28:24 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 // #include "AMateria.hpp"
-// #include "Ice.hpp"
-// #include "Cure.hpp"
 #include <string>
 
 class AMateria;
