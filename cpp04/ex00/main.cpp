@@ -24,7 +24,7 @@ meta->makeSound();
 // std::cout << animal->getType() << " " << std::endl;
 // std::cout << dogAgain->getType() << " " << std::endl;
 // dog.onlyDogCanDo();
-// animal.onlyDogCanDo();
+// // animal->onlyDogCanDo();
 // dogAgain->onlyDogCanDo();
 // std::cout << "---------------------------------------" << std::endl;
 delete j;

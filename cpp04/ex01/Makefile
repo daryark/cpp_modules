@@ -6,7 +6,7 @@ HDR = Animal.hpp Cat.hpp Dog.hpp Brain.hpp
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
 OBJ_F = obj/
 
-CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow -pedantic -O3 -g
+CC_FLAGS = c++ -std=c++98 -Wall -Wextra -O3 -g
 NAME =  Animal
 
 all:$(NAME)

@@ -25,12 +25,12 @@ int main()
     std::cout << i->getType() << std::endl;
     delete j;//should not create a leak
     delete i;
-    // std::cout << "------------DOG-----------------\n";
-    // Dog dog;
-    // dog.makeSound();
-    // Dog otherDog;
+    std::cout << "------------DOG-----------------\n";
+    Dog dog;
+    dog.makeSound();
+    Dog otherDog;
 
-    // dog = otherDog;
+    dog = otherDog;
     // std::cout << "-----------------------------\n";
     // dog.getIdeaByIdx(11);
     // dog.setIdeaByIdx("my very good idea", 11);

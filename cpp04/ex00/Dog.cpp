@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 17:54:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:37:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void    Dog::makeSound() const
     std::cout << BLUE << "Bark 🐕" << RE << std::endl;
 }
 
-// void    Dog::onlyDogCanDo() const
-// {
-//     std::cout << "only dog can do" << std::endl;
-// }
+void    Dog::onlyDogCanDo() const
+{
+    std::cout << "only dog can do" << std::endl;
+}

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:32:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/13 15:33:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:46:43 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ class WrongAnimal
         WrongAnimal(const WrongAnimal& other);
         WrongAnimal&             operator=(const WrongAnimal& other);
         const std::string&  getType() const;
-        virtual void        makeSound() const;
+        void        makeSound() const;
 };

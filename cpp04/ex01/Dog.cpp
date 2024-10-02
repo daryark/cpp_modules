@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:33:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/09/14 00:23:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:07:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ Dog& Dog::operator=(const Dog& other)
         Animal::operator=(other);
         if (this != &other)
             *(_brain) = *(other._brain);
-        // std::cout << "address this: " << _brain
-        // << ", address other: " << other._brain << std::endl;
+        std::cout << "address this: " << _brain
+        << ", address other: " << other._brain << std::endl;
     }
     std::cout << BLUE << _type << RE
     << " copy assignment operator" << std::endl;
