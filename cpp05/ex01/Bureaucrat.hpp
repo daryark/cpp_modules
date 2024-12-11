@@ -6,15 +6,16 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/11 14:46:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:59:30 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
-#include "../colors.cpp"
+#include "../colors.hpp"
 #include <iostream>
-// #include <exception>
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -22,6 +23,7 @@ private:
     const std::string   _name;
     unsigned int        _grade;
     void    checkGradeThrowException() const;
+    Bureaucrat();
 
 public:
     Bureaucrat(std::string name, unsigned int grade);
@@ -32,6 +34,7 @@ public:
     int         getGrade()  const;
     void        increment();
     void        decrement();
+    void        signForm(const Form& form)  const;
 
     class GradeTooHighException: public std::exception
     {
