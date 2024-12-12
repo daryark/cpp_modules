@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/11 19:59:30 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:24:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Bureaucrat
 {
 private:
     const std::string   _name;
-    unsigned int        _grade;
+    int                 _grade;
     void    checkGradeThrowException() const;
     Bureaucrat();
 
@@ -34,7 +34,7 @@ public:
     int         getGrade()  const;
     void        increment();
     void        decrement();
-    void        signForm(const Form& form)  const;
+    void        signForm(Form& form);
 
     class GradeTooHighException: public std::exception
     {

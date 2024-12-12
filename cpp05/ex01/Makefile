@@ -6,7 +6,7 @@ HDR = Bureaucrat.hpp Form.hpp
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
 OBJ_F = obj/
 
-CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
+CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow -O3 -g
 NAME =  Bureaucrat
 
 all:$(NAME)

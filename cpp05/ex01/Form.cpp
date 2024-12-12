@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:01:57 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/11 20:02:34 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:25:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Form::Form(): _name("basic_form"), _is_signed(false), _sign_grade(150), _exec_gr
     std::cout << GREEN << "Basic form constructor" << RE << std::endl;
 }
 
-Form::Form(std::string name, unsigned int sign_grade, unsigned int exec_grade):
+Form::Form(std::string name, int sign_grade, int exec_grade):
 _name(name), _is_signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
 {
     checkGradeThrowException(_exec_grade);
@@ -55,12 +55,12 @@ bool            Form::getIsSigned() const
     return _is_signed;
 }
 
-unsigned int    Form::getSignGrade()    const
+int    Form::getSignGrade()    const
 {
     return  _sign_grade;
 }
 
-unsigned int    Form::getExecGrade()    const
+int    Form::getExecGrade()    const
 {
     return  _exec_grade;
 }
@@ -77,24 +77,22 @@ const char*     Form::GradeTooLowException::what()   const throw()
 }
 
 //-----------------------methods--------------------------
-void            Form::beSigned(const Bureaucrat& person)
+bool            Form::beSigned(Bureaucrat& person)
 {
-    unsigned int    grade = person.getGrade();
     if (_is_signed)
     {
-        std::cout << this->_name << " form is already signed!" << std::endl;
-        return ;
+        std::cout << _name << " form is already signed!" << std::endl;
+        return false;
     }
-    checkGradeThrowException(grade);
-    if (grade <= this->_sign_grade)
-        _is_signed = true;
-    person.signForm(*this);
-    if (grade > this->_sign_grade)
+    if (person.getGrade() > _sign_grade)
         throw Form::GradeTooLowException();
+    _is_signed = true;
+    std::cout << "Form " << _name << " is successfully signed" << std::endl;
+    return true;
 }
 
 //--------------------helper stuff------------------------
-void            Form::checkGradeThrowException(unsigned int grade)    const
+void            Form::checkGradeThrowException(int grade)    const
 {
      if (grade < 1)
         throw Form::GradeTooHighException();

@@ -6,25 +6,24 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/11 14:46:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:21:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../colors.cpp"
+#include "../colors.hpp"
 #include <iostream>
-// #include <exception>
 
 class Bureaucrat
 {
 private:
     const std::string   _name;
-    unsigned int        _grade;
+    int                 _grade;
     void    checkGradeThrowException() const;
 
 public:
-    Bureaucrat(std::string name, unsigned int grade);
+    Bureaucrat(std::string name, int grade);
     ~Bureaucrat();
     Bureaucrat(const Bureaucrat& other);
     Bureaucrat& operator=(const Bureaucrat& other);

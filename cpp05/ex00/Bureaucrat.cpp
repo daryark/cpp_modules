@@ -6,14 +6,15 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/11 15:58:26 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:21:58 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade): _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 {
+    checkGradeThrowException();
     std::cout << GREEN << _name << " constructor" << RE << std::endl;
 };
 
@@ -22,7 +23,9 @@ Bureaucrat::~Bureaucrat()
     std::cout << RED << _name << " destructor" << RE << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other)
+//if smth is const in class, you cannot copy it in operator.
+//then you create it from scratch once here in copy constructor
+Bureaucrat::Bureaucrat(const Bureaucrat& other): _name(other._name)
 {
     *this = other;
     std::cout << YELLOW << "Bureaucrat" << RE << " copy constuctor" << std::endl;
@@ -30,6 +33,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other)
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
+    std::cout << YELLOW << "Bureaucrat" << RE << " copy assignment" << std::endl;
     if (this != &other)
         _grade = other._grade;
     return *this;

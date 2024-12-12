@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/11 13:58:40 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:25:25 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,23 @@ int main(void)
         std::cerr << e.what() << std::endl;
     }
     std::cout << "-------------------" << std::endl;
-    Bureaucrat printer("Printer", 33);
-    std::cout << printer << std::endl;
+    try {
+        Bureaucrat norm("NormNo", 10);
+        std::cout << norm;
+        Bureaucrat noNorm(norm);
+        norm.decrement();
+        noNorm = norm;
+        std::cout << norm;
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+    std::cout << "-------------------" << std::endl;
+    try {
+        Bureaucrat printer("Printer", 33);
+        std::cout << printer << std::endl;
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
     return 0;
 }
 
