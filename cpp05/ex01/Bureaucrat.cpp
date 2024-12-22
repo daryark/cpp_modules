@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/12 19:23:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/22 22:52:01 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int         Bureaucrat::getGrade()   const
 //--------------------Exceptions------------------------
 const char* Bureaucrat::GradeTooHighException::what()   const throw()
 {
-    return  "Grade too high!";
+    return  "Grade too high, bureaucrat!";
 }
 
 const char* Bureaucrat::GradeTooLowException::what()   const throw()
 {
-    return  "Grade too low!";
+    return  "Grade too low, bureaucrat!";
 }
 
 //-----------------------methods------------------------
@@ -80,10 +80,11 @@ void    Bureaucrat::signForm(Form& form)
 {
     try {
         if (form.beSigned(*this))
-            std::cout << this->_name << " signed '" << form.getName() << "'" << std::endl;
+            std::cout << B_GREEN << this->_name << " signed '" << form.getName() << "'" << RE << std::endl;
     } catch (std::exception& e) {
-        std::cout << this->_name << " couldn't sign form because "
-        << this->_grade << " < " << form.getSignGrade() << std::endl;
+        std::cerr << e.what() << std::endl;
+        std::cerr << B_RED << this->_name << " couldn't sign form " << form.getName() << " because "
+        << this->_grade << " < " << form.getSignGrade() << RE << std::endl;
     }
 }
 
@@ -97,7 +98,7 @@ void    Bureaucrat::checkGradeThrowException()    const
 }
 
 //--------------not in class. but to display/work with class properly
-std::ostream&   operator<<(std::ostream& os, const Bureaucrat& instance)
+std::ostream&   operator<<(std::ostream& os, const Bureaucrat& i)
 {
-    return os << instance.getName() << ", bureaucrat grade " << instance.getGrade() << std::endl;
+    return os << i.getName() << ", bureaucrat grade " << i.getGrade() << std::endl;
 }

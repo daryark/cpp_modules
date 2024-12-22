@@ -6,11 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:01:57 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/12 19:25:12 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/22 22:48:50 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+
+std::string formatStr(std::string s);
 
 Form::Form(): _name("basic_form"), _is_signed(false), _sign_grade(150), _exec_grade(150)
 {
@@ -40,7 +42,7 @@ Form&   Form::operator=(const Form& other)
 {
     if (this != &other)
         _is_signed = other._is_signed;
-    std::cout << _name << " form copy constructor" << std::endl;
+    std::cout << _name << " form copy assignment operator" << std::endl;
     return *this;
 }
 
@@ -68,12 +70,12 @@ int    Form::getExecGrade()    const
 //--------------------Exceptions------------------------
 const char*     Form::GradeTooHighException::what()   const throw()
 {
-    return  "Grade too high!";
+    return  "Grade too high, form!";
 }
 
 const char*     Form::GradeTooLowException::what()   const throw()
 {
-    return  "Grade too low!";
+    return  "Grade too low, form!";
 }
 
 //-----------------------methods--------------------------
@@ -81,13 +83,13 @@ bool            Form::beSigned(Bureaucrat& person)
 {
     if (_is_signed)
     {
-        std::cout << _name << " form is already signed!" << std::endl;
+        std::cout << I_BLACK << "'" << _name << "' form is already signed!" << RE << std::endl;
         return false;
     }
     if (person.getGrade() > _sign_grade)
         throw Form::GradeTooLowException();
     _is_signed = true;
-    std::cout << "Form " << _name << " is successfully signed" << std::endl;
+    std::cout << "Form '" << _name << "' is successfully signed" << std::endl;
     return true;
 }
 
@@ -103,6 +105,9 @@ void            Form::checkGradeThrowException(int grade)    const
 //--------------not in class. but to display/work with class properly
 std::ostream&   operator<<(std::ostream& os, const Form& i)
 {
-    return os << YELLOW << i.getName() << ", form sign grade: " << i.getSignGrade() << ", exec grade: "
-        << i.getExecGrade() << ", is signed: " << i.getIsSigned() << RE << std::endl;
+    std::string form_name = formatStr(i.getName());
+    return os << B_WHITE << "Form name: " << form_name
+        << "       |sign grade: " << i.getSignGrade()
+        << "    |exec grade: " << i.getExecGrade()
+        << "    |is signed: " << i.getIsSigned() << RE << std::endl;
 }
