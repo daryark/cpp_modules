@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/12 16:21:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/24 19:58:58 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ const char* Bureaucrat::GradeTooLowException::what()   const throw()
 }
 
 //--------------------helper stuff------------------------
-void    Bureaucrat::checkGradeThrowException()    const
+void    Bureaucrat::checkGradeThrowException()
 {
-     if (_grade < 1)
+     if (_grade < G_HIGHEST)
         throw Bureaucrat::GradeTooHighException();
-    else if(_grade > 150)
+    else if(_grade > G_LOWEST)
         throw Bureaucrat::GradeTooLowException();
 }
 

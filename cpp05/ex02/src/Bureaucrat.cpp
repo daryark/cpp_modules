@@ -6,11 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/24 19:59:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 20:16:39 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../incl/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade): _name(name), _grade(grade)
 {
@@ -76,16 +76,36 @@ void        Bureaucrat::decrement()
     std::cout << "now grade is " << B_YELLOW << _grade << RE << std::endl;
 }
 
-void    Bureaucrat::signForm(Form& form)
+void    Bureaucrat::signForm(AForm& form)
 {
     try {
         if (form.beSigned(*this))
             std::cout << B_GREEN << _name << " signed '" << form.getName() << "'" << RE << std::endl;
     } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
         std::cerr << B_RED << _name << " couldn't sign form " << form.getName() << " because "
-        << _grade << " < " << form.getSignGrade() << RE << std::endl;
+        << e.what() << RE << std::endl;
     }
+}
+
+void    Bureaucrat::execForm(AForm& form)
+{
+    try {
+        form.execute(*this);
+        std::cout << B_GREEN << _name << " executed '" << form.getName() << "'" << RE << std::endl;
+    }    catch (const AForm::GradeTooLowException & e) {
+        std::cerr << _name << " couldn't execute " << e.what() << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "An unexpected error occurred while executing form " << std::endl;
+    }
+    // } catch (ShrubberyCreationForm::NotCreatedFileException& e) {
+    //     // std::cerr << "ERRORRRRR" << std::endl;
+    //     // std::cerr << B_RED << _name << " couldn't execute form " << form.getName() << " because "
+    //     std::cerr << YELLOW << e.what() << RE << std::endl;
+    // } catch (std::exception& e)
+    // {
+    //     std::cerr << e.what() << std::endl;
+    // }
 }
 
 //--------------------helper stuff------------------------

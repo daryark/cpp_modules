@@ -6,13 +6,18 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:48 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/12 19:24:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/24 20:01:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "../colors.hpp"
+
+#define G_LOWEST    150
+#define G_HIGHEST   1
+
 #include <iostream>
+
+#include "../colors.hpp"
 #include "Form.hpp"
 
 class Form;
@@ -22,8 +27,9 @@ class Bureaucrat
 private:
     const std::string   _name;
     int                 _grade;
-    void    checkGradeThrowException() const;
+
     Bureaucrat();
+    void         checkGradeThrowException();
 
 public:
     Bureaucrat(std::string name, unsigned int grade);

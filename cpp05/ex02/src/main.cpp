@@ -6,11 +6,12 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/24 20:02:01 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 16:52:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../incl/Bureaucrat.hpp"
+#include "../incl/ShrubberyCreationForm.hpp"
 
 std::string formatStr(std::string s)
 {
@@ -26,48 +27,52 @@ std::string formatStr(std::string s)
 //!and with form itself being signed: form.beSigned()
 int main(void)
 {
-    Form f1("First", 10, 10);
-    Form f2("Secondddd", 20, 15);
-    Form copy(f1);
+    ShrubberyCreationForm   forest("forest");
+    ShrubberyCreationForm   myForest("my forest");
 
-    std::cout << f1;
-    std::cout << f2;
-    std::cout << copy;
-    std::cout << std::endl;
+    myForest.action();
+    // Form f1("First", 10, 10);
+    // Form f2("Secondddd", 20, 15);
+    // Form copy(f1);
 
-    try {
-        Bureaucrat  importantMan("ImportantMan", 2);
-        importantMan.signForm(f2); //signed now
-        Bureaucrat  freshman("Freshman", 20);
-        freshman.signForm(f2);//already signed
-        freshman.signForm(copy);//not signed, low grade
-        // while (freshman.getGrade() > copy.getSignGrade())
-        //     freshman.increment(); //raise grade
-        // freshman.signForm(copy); //signed now
-    } catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    // std::cout << f1;
+    // std::cout << f2;
+    // std::cout << copy;
+    // std::cout << std::endl;
+
+    // try {
+    //     Bureaucrat  importantMan("ImportantMan", 2);
+    //     importantMan.signForm(f2); //signed now
+    //     Bureaucrat  freshman("Freshman", 20);
+    //     freshman.signForm(f2);//already signed
+    //     freshman.signForm(copy);//not signed, low grade
+    //     // while (freshman.getGrade() > copy.getSignGrade())
+    //     //     freshman.increment(); //raise grade
+    //     // freshman.signForm(copy); //signed now
+    // } catch (std::exception& e) {
+    //     std::cerr << e.what() << std::endl;
+    // }
     // std::cout << std::endl;
     // copy = f2;
     // std::cout << copy;
     // std::cout << std::endl;
-    //Execeptions
-    try
-    {
-        Form exception("Hello", 10, -10);//to high grade
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    try
-    {
-        Form exception("Hello", 10, 151);//to low grade
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    // //Execeptions
+    // try
+    // {
+    //     Form exception("Hello", 10, -10);//to high grade
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cerr << e.what() << std::endl;
+    // }
+    // try
+    // {
+    //     Form exception("Hello", 10, 151);//to low grade
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cerr << e.what() << std::endl;
+    // }
     // std::cout << std::endl;
     // 
     // Bureaucrat me("Dasha", 11);

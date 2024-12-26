@@ -7,7 +7,7 @@
 #define GREEN		"\033[0;32m"
 #define YELLOW		"\033[0;33m"
 #define BLUE		"\033[0;34m"
-#define PURPLE		"\033[0;35m"
+#define MAGENTA		"\033[0;35m"
 #define CYAN		"\033[0;36m"
 #define WHITE		"\033[0;37m"
 /* High Intensity */
@@ -16,7 +16,7 @@
 #define I_GREEN		"\033[0;92m"
 #define I_YELLOW	"\033[0;93m"
 #define I_BLUE		"\033[0;94m"
-#define I_PURPLE	"\033[0;95m"
+#define I_MAGENTA	"\033[0;95m"
 #define I_CYAN		"\033[0;96m"
 #define I_WHITE		"\033[0;97m"
 /* Bold */
@@ -25,7 +25,7 @@
 #define B_GREEN		"\033[1;32m"
 #define B_YELLOW	"\033[1;33m"
 #define B_BLUE		"\033[1;34m"
-#define B_PURPLE	"\033[1;35m"
+#define B_MAGENTA	"\033[1;35m"
 #define B_CYAN		"\033[1;36m"
 #define B_WHITE		"\033[1;37m"
 /* Bold High Intensity */
@@ -34,7 +34,7 @@
 #define BI_GREEN	"\033[1;92m"
 #define BI_YELLOW	"\033[1;93m"
 #define BI_BLUE		"\033[1;94m"
-#define BI_PURPLE	"\033[1;95m"
+#define BI_MAGENTA	"\033[1;95m"
 #define BI_CYAN		"\033[1;96m"
 #define BI_WHITE	"\033[1;97m"
 /* Underline */
@@ -43,7 +43,7 @@
 #define U_GREEN		"\033[4;32m"
 #define U_YELLOW	"\033[4;33m"
 #define U_BLUE		"\033[4;34m"
-#define U_PURPLE	"\033[4;35m"
+#define U_MAGENTA	"\033[4;35m"
 #define U_CYAN		"\033[4;36m"
 #define U_WHITE		"\033[4;37m"
 /* Background */
@@ -52,7 +52,7 @@
 #define BG_GREEN	"\033[42m"
 #define BG_YELLOW	"\033[43m"
 #define BG_BLUE		"\033[44m"
-#define BG_PURPLE	"\033[45m"
+#define BG_MAGENTA	"\033[45m"
 #define BG_CYAN		"\033[46m"
 #define BG_WHITE	"\033[47m"
 /* High Intesity Background */
@@ -61,6 +61,6 @@
 #define BG_I_GREEN	"\033[0;102m"
 #define BG_I_YELLOW	"\033[0;103m"
 #define BG_I_BLUE	"\033[0;104m"
-#define BG_I_PURPLE	"\033[10;95m"
+#define BG_I_MAGENTA	"\033[10;95m"
 #define BG_I_CYAN	"\033[0;106m"
 #define BG_I_WHITE	"\033[0;107m"
