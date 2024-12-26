@@ -6,13 +6,14 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 22:56:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 23:35:48 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/Bureaucrat.hpp"
 #include "incl/ShrubberyCreationForm.hpp"
 #include "incl/RobotomyRequestForm.hpp"
+#include "incl/PresidentialPardonForm.hpp"
 
 std::string formatStr(std::string s)
 {
@@ -25,86 +26,108 @@ std::string formatStr(std::string s)
     }
 }
 
+//*Write good tests for each class try/catch, good/bad grades test
 int main(void)
 {
-    ShrubberyCreationForm   forest;
-    RobotomyRequestForm     robo;
-    Bureaucrat              executor("EE", 137);
-    // ShrubberyCreationForm   myForest("my forest");
-    try {
-        // executor.signForm(forest);
-        // executor.execForm(forest);
-        // forest.execute(executor); //в таком варианте может вылететь эксепшн, если файл не создан.
-        // но его ловит только бюрократ обычно. или тогда тут в мейне
-        executor.signForm(robo);
-        executor.signForm(robo);
-        executor.execForm(robo);
-    } catch (std::exception& e)
+    // ShrubberyCreationForm
     {
-        std::cerr << e.what() << std::endl;
+        ShrubberyCreationForm ShrubbForm("Schrubb Form");
+        Bureaucrat BureaucratCanSign("I can sign", 130);
+        Bureaucrat BureaucratCantSign("I cant sign", 146);
+        try
+        {
+            ShrubbForm.beSigned(BureaucratCantSign); // Exception occurs
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        try
+        {
+            BureaucratCanSign.execForm(ShrubbForm); // Exception occurs
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        try
+        {
+            ShrubbForm.beSigned(BureaucratCanSign); // No Exception
+            BureaucratCanSign.execForm(ShrubbForm);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
-    // myForest.action();
 
-    // Form f1("First", 10, 10);
-    // Form f2("Secondddd", 20, 15);
-    // Form copy(f1);
+    // Presidential
+    std::cout << std::endl;
 
-    // std::cout << f1;
-    // std::cout << f2;
-    // std::cout << copy;
-    // std::cout << std::endl;
+    {
+        PresidentialPardonForm PresidentForm("President Form");
+        Bureaucrat BureaucratCanSign("I can sign", 4);
+        Bureaucrat BureaucratCantSign("I cant sign", 26);
+        try
+        {
+            PresidentForm.beSigned(BureaucratCantSign); // Exception occurs
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        try
+        {
+            BureaucratCanSign.execForm(PresidentForm); // Exception occurs
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        try
+        {
+            PresidentForm.beSigned(BureaucratCanSign); // No Exception
+            BureaucratCanSign.execForm(PresidentForm);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
 
-    // try {
-    //     Bureaucrat  importantMan("ImportantMan", 2);
-    //     importantMan.signForm(f2); //signed now
-    //     Bureaucrat  freshman("Freshman", 20);
-    //     freshman.signForm(f2);//already signed
-    //     freshman.signForm(copy);//not signed, low grade
-    //     // while (freshman.getGrade() > copy.getSignGrade())
-    //     //     freshman.increment(); //raise grade
-    //     // freshman.signForm(copy); //signed now
-    // } catch (std::exception& e) {
-    //     std::cerr << e.what() << std::endl;
-    // }
-    // std::cout << std::endl;
-    // copy = f2;
-    // std::cout << copy;
-    // std::cout << std::endl;
-    // //Execeptions
-    // try
-    // {
-    //     Form exception("Hello", 10, -10);//to high grade
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cerr << e.what() << std::endl;
-    // }
-    // try
-    // {
-    //     Form exception("Hello", 10, 151);//to low grade
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cerr << e.what() << std::endl;
-    // }
-    // std::cout << std::endl;
-    // 
-    // Bureaucrat me("Dasha", 11);
-    // try
-    // {
-    //     me.signForm(f1);
-    //     me.signForm(f2);
-    //     me.increment();
-    //     me.signForm(f1);
-    //     while (me.getGrade() > 0)
-    //         me.increment();
-    //     me.decrement(); //NOT EXEC LINE - while will reach the GradeTooHighException
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cerr << e.what() << std::endl;
-    // }
-    return 0;
+    // Robotomy
+    std::cout << std::endl;
+
+    {
+        RobotomyRequestForm RobotForm("Robotomy Form");
+        Bureaucrat BureaucratCanSign("I can sign", 44);
+        Bureaucrat BureaucratCantSign("I cant sign", 73);
+        try
+        {
+            RobotForm.beSigned(BureaucratCantSign); // Exception occurs
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        try
+        {
+            BureaucratCanSign.execForm(RobotForm); // Exception occurs
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        try
+        {
+            RobotForm.beSigned(BureaucratCanSign); // No Exception
+            BureaucratCanSign.execForm(RobotForm);
+
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
 }
-
  

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:17:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 22:38:10 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 23:25:07 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,17 @@ const char* ShrubberyCreationForm::NotCreatedFileException::what() const throw()
     return "File isn't created, in Shrubbery!";
 }
 
+//-------------------getters----------------------------
+const std::string ShrubberyCreationForm::getTarget() const
+{
+    return _target;
+}
+
 //-----------------------methods------------------------
 void ShrubberyCreationForm::action() const
 {
     std::string filename = _target + "_shrubbery";
-    std::fstream outfile(filename.c_str());
+    std::fstream outfile(filename.c_str(), std::ios::out);
     if (!outfile.is_open())
         throw NotCreatedFileException();
     outfile << "       🌳\n";
