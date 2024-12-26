@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:38:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 21:58:27 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:50:50 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,11 @@ void    Bureaucrat::signForm(AForm& form)
 void    Bureaucrat::execForm(AForm& form)
 {
     try {
-        std::cout << "go to exec form\n";
         form.execute(*this);
         std::cout << B_GREEN << _name << " executed '" << form.getName() << "'" << RE << std::endl;
     }  catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
-    // } catch (ShrubberyCreationForm::NotCreatedFileException& e) {
-        // std::cerr << "ERRORRRRR" << std::endl;
-        // std::cerr << B_RED << _name << " couldn't execute form " << form.getName() << " because "
-    //     std::cerr << YELLOW << e.what() << RE << std::endl;
-    // } catch (std::exception& e)
-    // {
-    //     std::cerr << e.what() << std::endl;
-    // }
 }
 
 //--------------------helper stuff------------------------

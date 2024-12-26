@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/24 20:02:01 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:45:24 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ std::string formatStr(std::string s)
         return (s + spaces);
     }
 }
-//!check all the tests, especially with bure.signForm() 
-//!and with form itself being signed: form.beSigned()
+
 int main(void)
 {
     Form f1("First", 10, 10);
@@ -41,16 +40,9 @@ int main(void)
         Bureaucrat  freshman("Freshman", 20);
         freshman.signForm(f2);//already signed
         freshman.signForm(copy);//not signed, low grade
-        // while (freshman.getGrade() > copy.getSignGrade())
-        //     freshman.increment(); //raise grade
-        // freshman.signForm(copy); //signed now
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
-    // std::cout << std::endl;
-    // copy = f2;
-    // std::cout << copy;
-    // std::cout << std::endl;
     //Execeptions
     try
     {

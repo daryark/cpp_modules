@@ -6,12 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 22:03:40 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:56:33 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/Bureaucrat.hpp"
 #include "incl/ShrubberyCreationForm.hpp"
+#include "incl/RobotomyRequestForm.hpp"
 
 std::string formatStr(std::string s)
 {
@@ -23,17 +24,21 @@ std::string formatStr(std::string s)
         return (s + spaces);
     }
 }
-//!check all the tests, especially with bure.signForm() 
-//!and with form itself being signed: form.beSigned()
+
 int main(void)
 {
     ShrubberyCreationForm   forest;
+    RobotomyRequestForm     robo;
     Bureaucrat              executor("EE", 137);
     // ShrubberyCreationForm   myForest("my forest");
     try {
-        executor.signForm(forest);
-        executor.execForm(forest);
-        // forest.execute(executor);
+        // executor.signForm(forest);
+        // executor.execForm(forest);
+        // forest.execute(executor); //в таком варианте может вылететь эксепшн, если файл не создан.
+        // но его ловит только бюрократ обычно. или тогда тут в мейне
+        executor.signForm(robo);
+        executor.signForm(robo);
+        executor.execForm(robo);
     } catch (std::exception& e)
     {
         std::cerr << e.what() << std::endl;

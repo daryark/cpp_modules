@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:01:57 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 22:04:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:57:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ std::string formatStr(std::string s);
 
 AForm::AForm(): _name("basic_form"), _is_signed(false), _sign_grade(150), _exec_grade(150)
 {
-    std::cout << GREEN << "Basic form constructor" << RE << std::endl;
+    // std::cout << GREEN << "Basic form constructor" << RE << std::endl;
 }
 
 //----------------------Constructors & operators----------------------
@@ -25,25 +25,25 @@ _name(name), _is_signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
 {
     checkGradeThrowException(_sign_grade);
     checkGradeThrowException(_exec_grade);
-    std::cout << GREEN << _name << " form constructor" << RE << std::endl;
+    // std::cout << GREEN << _name << " form constructor" << RE << std::endl;
 }
 
 AForm::~AForm()
 {
-    std::cout << RED << _name << " form destructor" << RE << std::endl;
+    // std::cout << RED << _name << " form destructor" << RE << std::endl;
 }
 
 AForm::AForm(const AForm& other)
     : _name(other._name), _is_signed(other._is_signed), _sign_grade(other._sign_grade), _exec_grade(other._exec_grade)
 {
-    std::cout << _name << " form copy constructor" << std::endl;
+    // std::cout << _name << " form copy constructor" << std::endl;
 }
 
 AForm&   AForm::operator=(const AForm& other)
 {
     if (this != &other)
         _is_signed = other._is_signed;
-    std::cout << _name << " form copy assignment operator" << std::endl;
+    // std::cout << _name << " form copy assignment operator" << std::endl;
     return *this;
 }
 
@@ -89,20 +89,18 @@ bool            AForm::beSigned(Bureaucrat& person)
 {
     if (_is_signed)
     {
-        std::cout << I_BLACK << "'" << _name << "' form is already signed!" << RE << std::endl;
+        std::cout << BI_BLACK << "'" << _name << "' form is already signed!" << RE << std::endl;
         return false;
     }
     if (person.getGrade() > _sign_grade)
         throw AForm::GradeTooLowException();
     _is_signed = true;
-    std::cout << "AForm '" << _name << "' is successfully signed" << std::endl;
+    std::cout << BI_YELLOW << "AForm '" << _name << "' is successfully signed" << RE << std::endl;
     return true;
 }
 
 void            AForm::execute(const Bureaucrat& executor)  const
 {
-    std::cout << "is signed: " << _is_signed << ", grade bureaucrat: " << executor.getGrade() << ", form sign grade: " << _sign_grade
-        << ", exec grade: " << _exec_grade << std::endl;
     if (!_is_signed)
         throw NotSignedException();
     else if (_exec_grade < executor.getGrade())
