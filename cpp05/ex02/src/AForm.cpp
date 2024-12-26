@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:01:57 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 20:37:35 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:04:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ bool            AForm::beSigned(Bureaucrat& person)
 
 void            AForm::execute(const Bureaucrat& executor)  const
 {
+    std::cout << "is signed: " << _is_signed << ", grade bureaucrat: " << executor.getGrade() << ", form sign grade: " << _sign_grade
+        << ", exec grade: " << _exec_grade << std::endl;
     if (!_is_signed)
         throw NotSignedException();
-    if (_exec_grade > executor.getGrade())
+    else if (_exec_grade < executor.getGrade())
         throw GradeTooLowException();
     else
         action();

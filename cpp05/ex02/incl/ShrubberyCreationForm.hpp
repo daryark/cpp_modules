@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:17:21 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 20:34:37 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 20:51:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class ShrubberyCreationForm: public AForm
 {
 private:
     std::string _target;
+    void    action()    const;
 
 public:
     ShrubberyCreationForm();
@@ -30,8 +31,6 @@ public:
 
     ShrubberyCreationForm(const ShrubberyCreationForm& other);
     ShrubberyCreationForm&    operator=(const ShrubberyCreationForm& other);
-
-    void    action()    const;
 
     class NotCreatedFileException: public std::exception
     {

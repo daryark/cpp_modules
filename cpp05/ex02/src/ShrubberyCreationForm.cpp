@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:17:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 20:34:11 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:05:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void ShrubberyCreationForm::action() const
     outfile << " 🌱  🌿  🌵  🍀\n";
     outfile.close();
     std::cout << BI_MAGENTA << "File " << filename << " is created" << std::endl;
-    return ;
 }
 // std::fstream outfile(filename.c_str(), std::ios::out); OR std::ofstream outfile(filename.c_str());
 //if the file doens't exist (when default setup is std::ios::in | std::ios::out) - it crushes, so need to specify different mode

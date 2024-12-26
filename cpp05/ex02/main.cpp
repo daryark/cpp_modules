@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 20:22:02 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:03:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ std::string formatStr(std::string s)
 int main(void)
 {
     ShrubberyCreationForm   forest;
+    Bureaucrat              executor("EE", 137);
     // ShrubberyCreationForm   myForest("my forest");
-
-    forest.action();
+    try {
+        executor.signForm(forest);
+        executor.execForm(forest);
+        // forest.execute(executor);
+    } catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
     // myForest.action();
 
     // Form f1("First", 10, 10);
