@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:17:53 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 23:14:03 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/27 03:45:10 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <cstdlib> //rand fn
 #include <ctime> //srand fn (gives new arg for rand)
 
-#include "../../colors.hpp"
+#include "../../../colors.hpp"
 #include "AForm.hpp"
 
 class RobotomyRequestForm: public AForm

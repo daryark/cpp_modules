@@ -6,12 +6,12 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:13:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 18:52:11 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/27 03:44:30 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "../colors.hpp"
+#include "../../colors.hpp"
 #include "Bureaucrat.hpp"
 #include <iostream>
 

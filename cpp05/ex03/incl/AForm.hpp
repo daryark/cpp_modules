@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:13:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 21:57:04 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/27 03:45:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "../../colors.hpp"
+#include "../../../colors.hpp"
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;

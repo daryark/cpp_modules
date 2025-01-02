@@ -6,14 +6,14 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 14:19:03 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/12/26 23:14:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/12/27 03:46:01 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include "../../colors.hpp"
+#include "../../../colors.hpp"
 #include "AForm.hpp"
 
 class PresidentialPardonForm: public AForm
