@@ -6,13 +6,19 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 03:39:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/04 00:18:07 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:19:00 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <cctype>
+#include <cstdlib>
+#include <limits> //cpp limits (able to use with templates<>)
+#include <iomanip> //setprecision
+#include <typeinfo> //typeid
+#include "../colors.hpp"
 
 class ScalarConverter
 {

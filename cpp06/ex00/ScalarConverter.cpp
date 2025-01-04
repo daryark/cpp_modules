@@ -6,16 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 03:38:41 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/04 00:21:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:18:47 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cctype>
-#include <cstdlib>
-#include <limits> //cpp limits (able to use with templates<>)
-#include <iomanip> //setprecision
-#include <typeinfo> //typeid
-#include "../colors.hpp"
+
 #include "ScalarConverter.hpp"
 
 //----------------------convertions--------------------------
@@ -42,9 +37,8 @@ static void	castToNum(T t)
 		if (typeid(C) == typeid(float))
 			std::cout << "f"; 
 		std::cout << std::endl;
-	}
-	else
-		std::cout << t << "impossible" << std::endl;
+	} else
+		std::cout << "impossible" << std::endl;
 }
 
 template <typename T>
@@ -84,14 +78,13 @@ ScalarConverter::~ScalarConverter()
 
 void    ScalarConverter::convert(std::string s)
 {
-	std::cout << YELLOW << "CONVERT:	'" << s << "'" << RE << std::endl;
 	size_t dot = s.find('.');
 	if (isSpecType(s))
 		printSpecType(s);
 	else if (!s[1] && !isdigit(s[0]))
 		printer(static_cast<char>(s[0]));
 	else if (dot == std::string::npos)
-		printer(std::atoi(s.c_str()));
+		printer(std::atol(s.c_str()));
 	else
 		printer(std::atof(s.c_str())); //converts s->double(double size/precise float)
 }
