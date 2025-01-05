@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 03:39:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/04 21:19:00 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/01/05 00:15:02 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <limits> //cpp limits (able to use with templates<>)
 #include <iomanip> //setprecision
 #include <typeinfo> //typeid
-#include "../colors.hpp"
+#include "../../colors.hpp"
 
 class ScalarConverter
 {

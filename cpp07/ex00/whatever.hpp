@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 16:51:40 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/05 00:15:11 by dyarkovs         ###   ########.fr       */
+/*   Created: 2025/01/05 00:20:29 by dyarkovs          #+#    #+#             */
+/*   Updated: 2025/01/05 00:37:48 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#pragma once
+#include <iostream>
 
-int main(int ac, char** av)
+template <typename T>
+void    swap(T& a, T& b)
 {
-    if (ac != 2)
-    {
-        std::cerr << U_RED << "Write exactly one argument to convert!" << RE << std::endl;
-        return 1;
-    }
-    ScalarConverter::convert(av[1]);
-    return 0;
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+template <typename T>
+T    min(T a, T b)
+{
+    return a < b ? a : b;
+}
+
+template <typename T>
+T   max(T a, T b)
+{
+    return a > b ? a : b;
 }

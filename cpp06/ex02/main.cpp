@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 21:51:00 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/05 00:09:52 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/01/05 00:16:02 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 Base*   generate(void)
 {
-    std::cout << "generate" << std::endl;
     srand(time(NULL));
     int n = rand() % 3;
     if (n == 1)
