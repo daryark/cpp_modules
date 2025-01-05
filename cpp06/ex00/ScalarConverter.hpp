@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 03:39:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/05 00:15:02 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/01/05 10:45:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 class ScalarConverter
 {
 private:
-	ScalarConverter();//=delete(std11) //*to create static, non-instanciable class
-	ScalarConverter(const ScalarConverter& other);//=delete(std11) //*bcs of requirement for canonical form
-	ScalarConverter&    operator=(const ScalarConverter& other);//=delete(std11) //*bcs of requirement for canonical form
+	ScalarConverter(){};//=delete(std11) //*to create static, non-instanciable class //call fn to not have occasional linker errors, but no need to realize, as soon as never used
+	ScalarConverter(const ScalarConverter& other);//=delete(std11) //*
+	ScalarConverter&    operator=(const ScalarConverter& other);//=delete(std11) //*
 public:
 	~ScalarConverter();
 	static void convert(std::string s);
