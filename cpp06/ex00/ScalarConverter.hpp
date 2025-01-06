@@ -23,9 +23,10 @@
 class ScalarConverter
 {
 private:
-	ScalarConverter(){};//=delete(std11) //*to create static, non-instanciable class //call fn to not have occasional linker errors, but no need to realize, as soon as never used
-	ScalarConverter(const ScalarConverter& other);//=delete(std11) //*
-	ScalarConverter&    operator=(const ScalarConverter& other);//=delete(std11) //*
+	ScalarConverter(){};//=delete(std11) //? private to create static, non-instanciable class
+										//?call fn to not have occasional linker errors. But no need to realize, as soon as never used
+	ScalarConverter(const ScalarConverter& other){};//=delete(std11) //*
+	ScalarConverter&    operator=(const ScalarConverter& other){};//=delete(std11) //*
 public:
 	~ScalarConverter();
 	static void convert(std::string s);

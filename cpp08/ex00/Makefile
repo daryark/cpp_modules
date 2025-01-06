@@ -5,17 +5,18 @@ SRC =  main.cpp
 HDR = Array.hpp
 OBJ = $(SRC:.cpp=.o)
 
-CC_FLAGS = c++ -std=c++98 -Wall -Wextra -Werror -O3 -g
+CXX = c++
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -O3 -g
 NAME =  array
 
 all:$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC_FLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^
 	@echo "$(GREEN)OK$(RE)"
 
 %.o: %.cpp $(HDR) Makefile
-	$(CC_FLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf *.o
