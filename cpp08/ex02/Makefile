@@ -2,12 +2,12 @@ GREEN = \033[0;32m
 RE = \033[0m
 
 SRC =  main.cpp
-HDR = easyfind.hpp
+HDR = MutantStack.hpp
 OBJ = $(SRC:.cpp=.o)
 
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -O3 -g
-NAME =  easyfind
+NAME =  MutantStack
 
 all:$(NAME)
 

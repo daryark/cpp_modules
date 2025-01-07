@@ -1,13 +1,13 @@
 GREEN = \033[0;32m
 RE = \033[0m
 
-SRC =  main.cpp
-HDR = easyfind.hpp
+SRC =  main.cpp Span.cpp
+HDR = Span.hpp
 OBJ = $(SRC:.cpp=.o)
 
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -O3 -g
-NAME =  easyfind
+NAME =  span
 
 all:$(NAME)
 

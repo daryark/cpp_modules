@@ -6,14 +6,14 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/05 07:03:08 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:45:15 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cstdlib> //rand fn
 #include <ctime> //srand fn (gives new arg for rand)
-#include "../colors.hpp"
+#include "../../colors.hpp"
 #include "Array.hpp"
 
 #define MAX_VAL 750
