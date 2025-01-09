@@ -7,8 +7,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-# Set the desired committer email
-NEW_EMAIL="dyarkovs@student.42wolfsburg.de"
+# Set the desired author email
+NEW_AUTHOR_EMAIL="dyarkovs@student.42wolfsburg.de"
 
 # Ensure git is installed
 if ! command -v git &> /dev/null; then
@@ -20,13 +20,13 @@ fi
 echo "Adding changes to staging..."
 git add .
 
-# Commit with the specified committer email
-echo "Committing with committer email: $NEW_EMAIL"
-GIT_COMMITTER_EMAIL="$NEW_EMAIL" git commit -m "$1"
+# Commit with the specified author email
+echo "Committing with author email: $NEW_AUTHOR_EMAIL"
+GIT_AUTHOR_EMAIL="$NEW_AUTHOR_EMAIL" git commit -m "$1"
 
 # Push changes
 echo "Pushing changes to the repository..."
 git push
 
 # Confirmation message
-echo "Done! Changes have been pushed with committer email: $NEW_EMAIL."
+echo "Done! Changes have been pushed with author email: $NEW_AUTHOR_EMAIL."
