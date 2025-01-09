@@ -1,28 +1,31 @@
 #!/bin/bash
 
-# Ensure git-filter-repo is installed
-if ! command -v git-filter-repo &> /dev/null; then
-  echo "Error: git-filter-repo is not installed."
-  echo "Install it using: sudo apt install git-filter-repo (Linux) or brew install git-filter-repo (macOS)."
+# Set the old email pattern to match and the new email to replace it with
+OLD_EMAIL_PATTERN=".*42wolfsburg.de"
+NEW_AUTHOR_NAME="Your Name Here"  # Change this to your desired name
+NEW_AUTHOR_EMAIL="dyarkovs@student.42wolfsburg.de"
+
+# Ensure git is installed
+if ! command -v git &> /dev/null; then
+  echo "Error: Git is not installed. Please install it and try again."
   exit 1
 fi
 
-# Set the replacement email
-NEW_EMAIL="dyarkovs@student.42wolfsburg.de"
+# Rewriting commit history
+echo "Rewriting commit history to change author emails..."
+git filter-repo --quiet --force --commit-callback '
+import re
 
-# Check if the script is in a Git repository
-if ! git rev-parse --is-inside-work-tree &> /dev/null; then
-  echo "Error: This script must be run inside a Git repository."
-  exit 1
-fi
-
-# Rewrite history
-echo "Rewriting committer emails ending with '42wolfsburg.de'..."
-git filter-repo --commit-callback '
-if commit.committer_email.endswith("42wolfsburg.de"):
-    commit.committer_email = "'"$NEW_EMAIL"'"
+if re.match(r'"'"$OLD_EMAIL_PATTERN"'"', commit.original_author_email):
+    commit.author_name = "'"$NEW_AUTHOR_NAME"'"
+    commit.author_email = "'"$NEW_AUTHOR_EMAIL"'"
 '
 
-# Confirm success
-echo "Done! The committer emails have been updated to $NEW_EMAIL where applicable."
-echo "Force push the changes to your remote repository with: git push --force"
+if [ $? -eq 0 ]; then
+  echo "Successfully updated author emails for matching commits."
+else
+  echo "Error: Failed to rewrite author emails."
+  exit 1
+fi
+
+echo "Done!"
