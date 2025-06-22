@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 11:49:45 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/10/02 13:29:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:57:10 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int main(void)
 {
     Ice* ice = new Ice();
     Cure* cure = new Cure();
-    std::cout << "==============created materiasource===============\n";
+    std::cout << "==============create materiasource===============\n";
     MateriaSource one;
 	MateriaSource two;
     AMateria* created = NULL;
-    std::cout << "==============created me===============\n";
+    std::cout << "==============create me===============\n";
     Character me("ME_1");
     std::cout << me.getName() << std::endl;
     me.equip(ice); //0
