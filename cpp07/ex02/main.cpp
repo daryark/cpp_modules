@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:59:58 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/07 16:45:15 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:01:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,5 @@ int main(int, char**)
     for (unsigned int i = 0; i < a.size(); i++)
         std::cout << MAGENTA << a[i] << RE << std::endl;
     std::cout << "Size of a: " << a.size() << std::endl;
-    
     return 0;
 }

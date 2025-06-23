@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 21:37:49 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/22 22:30:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:59:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ catch(const std::exception& e)
 //     try
 //     {
 //         Span span(100001);
-//         span.fillVec(100000);
+//         span.fillContainer(100000);
 //         std::cout << GREEN << "Shortest span: " << span.shortestSpan() << RE << std::endl;
 //         std::cout << GREEN << "Longest span: " << span.longestSpan() << RE << std::endl;
 //         Span s(100000);
-//         s.fillVec(100001);
+//         s.fillContainer(100001);
 //         std::cout << RED << "Shortest span: " << s.shortestSpan() << RE << std::endl;
 //         std::cout << RED << "Longest span: " << s.longestSpan() << RE << std::endl;
 //     }
@@ -82,7 +82,7 @@ catch(const std::exception& e)
 //         span.addNumber(3);
 //         std::cout << GREEN << "Shortest span: " << span.shortestSpan() << RE << std::endl;
 //         std::cout << GREEN << "Longest span: " << span.longestSpan() << RE << std::endl;
-//         span.fillVec(100000);
+//         span.fillContainer(100000);
 //         std::cout << RED << "Shortest span: " << span.shortestSpan() << RE << std::endl;
 //         std::cout << RED << "Longest span: " << span.longestSpan() << RE << std::endl;
 //     }

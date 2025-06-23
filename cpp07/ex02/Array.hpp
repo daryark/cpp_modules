@@ -6,14 +6,15 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 00:20:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/01/07 16:45:53 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:29:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
 
-template <typename T> class Array
+template <typename T>
+class Array
 {
     private:
         unsigned int    _size;

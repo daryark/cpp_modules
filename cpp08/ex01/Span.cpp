@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 22:40:25 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/22 22:26:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:59:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ unsigned int    Span::calcSpan(bool (*compare)(unsigned int& curr, unsigned int&
             if (compare(curr, diff))
             diff = curr;
         }
-        // std::cout << "-------------------------------------" << std::endl;
         it++;
-        // std::cout << "i: " << i << " diff: " << diff << std::endl;
     }
-    // std::cout << GREEN << "-------------------------------------" << RE << std::endl;
     return  diff;
 }
 
@@ -81,7 +78,7 @@ bool    Span::max(unsigned int& a, unsigned int& b)
     return a > b;
 }
 
-void    Span::fillVec(unsigned int n)
+void    Span::fillContainer(unsigned int n)
 {
     if ((_max_size - _vec.size()) < n)
         throw std::runtime_error("Maximum capacity exceeded");

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 22:40:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/22 22:19:51 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:58:48 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ public:
     Span&           operator=(const Span&);
     
     void            addNumber(unsigned int);
-    void            fillVec(unsigned int);
+    void            fillContainer(unsigned int);
     unsigned int    shortestSpan()  const;
     unsigned int    longestSpan()   const;
 
