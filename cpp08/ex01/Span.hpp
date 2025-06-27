@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 22:40:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/27 17:30:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:33:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <ctime>
 #include <algorithm>
 
-#include "../colors.hpp"
+#include "../../colors.hpp"
 
 class Span
 {
