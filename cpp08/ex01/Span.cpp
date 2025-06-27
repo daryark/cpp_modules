@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 22:40:25 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/23 12:59:29 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:35:10 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,44 +38,33 @@ void    Span::addNumber(unsigned int n)
 
 unsigned int    Span::shortestSpan()    const
 {
-    return  calcSpan(min, std::numeric_limits<unsigned int>::max());
+    std::vector<int> sorted = _vec; //to not modify original
+    std::vector<int>::iterator it = sorted.begin(); //no const_iterator to modify the copy in std::sort
+    std::vector<int>::iterator end = sorted.end();
+    if (it == end || (it + 1) == end)
+        throw std::runtime_error("No span can be found");
+    std::sort(it, end);
+    unsigned int min_span = std::numeric_limits<unsigned int>::max();
+    while (++it != end)
+        min_span = std::min(min_span, static_cast<unsigned int>(*it - *(it - 1)));
+    return  min_span;
 }
 
 unsigned int    Span::longestSpan() const
 {
-    return  calcSpan(max, 0);
-}
-
-unsigned int    Span::calcSpan(bool (*compare)(unsigned int& curr, unsigned int& diff), unsigned int edge_limit)    const
-{
-    unsigned int diff = edge_limit;
-    
     std::vector<int>::const_iterator it = _vec.begin();
     std::vector<int>::const_iterator end = _vec.end();
     if (it == end || (it + 1) == end)
-    throw std::runtime_error("No span can be found");
-    for (unsigned int i = 0; i < _vec.size(); i++)
+        throw std::runtime_error("No span can be found");
+    unsigned int max = 0;
+    unsigned int min = std::numeric_limits<unsigned int>::max();
+    while (it != end)
     {
-        std::vector<int>::const_iterator curr_it = it;
-        while(++curr_it != end)
-        {
-            unsigned int curr = std::abs(*it - *curr_it);
-            if (compare(curr, diff))
-            diff = curr;
-        }
+        min = std::min(static_cast<unsigned int>(*it), min);
+        max = std::max(static_cast<unsigned int>(*it), max);
         it++;
     }
-    return  diff;
-}
-
-bool    Span::min(unsigned int& a, unsigned int& b)
-{
-    return a < b;
-}
-
-bool    Span::max(unsigned int& a, unsigned int& b)
-{
-    return a > b;
+    return (max - min);
 }
 
 void    Span::fillContainer(unsigned int n)

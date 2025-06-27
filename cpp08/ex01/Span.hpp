@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 22:40:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/23 12:58:48 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:30:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <limits>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 
 #include "../colors.hpp"
 
@@ -25,10 +26,6 @@ class Span
 private:
     std::vector<int>    _vec;
     unsigned int        _max_size;
-
-    unsigned int    calcSpan(bool (*fn)(unsigned int&, unsigned int&), unsigned int)  const;
-    static bool            min(unsigned int&, unsigned int&);
-    static bool            max(unsigned int&, unsigned int&);
 
 public:
     Span(unsigned int N);
