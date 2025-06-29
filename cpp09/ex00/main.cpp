@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:23:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/27 20:47:00 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:42:26 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 int main(int ac, char** av)
 {
     if (ac != 2)
-        return  std::cerr << RED << "Error: <filename> <string_to_find> <subst_string>" << RE << std::endl;
+    {
+        std::cerr << RED << "Usage: <program_name> <input_file>" << RE << std::endl;
+        return 1;
+    }
     try
     {
         BitcoinExchange data;
