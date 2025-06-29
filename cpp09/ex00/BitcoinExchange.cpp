@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:21:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/29 17:33:16 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:39:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,79 +30,73 @@ BitcoinExchange&    BitcoinExchange::operator=(const BitcoinExchange& other)
 
 void    BitcoinExchange::init()
 {
-    std::string     file_name = "data copy.csv";
-    std::ifstream    data_file(file_name.c_str());
-    if (!data_file.is_open())
-        throw std::runtime_error("Failed to open file: " + file_name);
+    std::string     filename = "data.csv";
+    std::ifstream   data_file(filename.c_str());
     std::string    line;
     std::getline(data_file, line);
-     if (line.compare("date,exchange_rate") != 0)
-        throw std::runtime_error("Invalid file format");
-    std::string    key;
-    float          value;
+    checkFFormat(line, "date,exchange_rate", filename);
+    std::string     key;
+    float           value;
     while (std::getline(data_file, line))
     {
-        std::istringstream iss(line);
-        std::getline(iss, key, ',');
-        trimInPlace(key);
-        if (!isDateFormatValid(key))
-            throw std::runtime_error(std::string("Invalid format/date: ") + RED + key + RE);
-        if (_bic_rates.find(key) != _bic_rates.end())
-            throw std::runtime_error(std::string("Date duplicate exchange rates file: ") + file_name);
-        iss >> value;
-        if (value < 0)
-        {
-            std::ostringstream oss;
-            oss << value;
-            throw std::runtime_error(std::string("Invalid value: ") + RED + oss.str() + RE);
-        }
+        const char* err = parseCheckLine(line, key, value, ',');
+        if (err != NULL)
+            throw std::runtime_error(err);
         _bic_rates[key] = value;
     }
 }
 
-void    BitcoinExchange::exchange(const std::string& filename)
+void    BitcoinExchange::exchange(std::string filename)
 {
-        std::ifstream   in_file(filename.c_str());
-    if (!in_file.is_open())
-        throw std::runtime_error("Failed to open file: " + filename);
+    std::ifstream   in_file(filename.c_str());
+    checkOpenFS(filename, in_file);
     std::string line;
     std::getline(in_file, line);
-    if (line.compare("date | value") != 0)
-        throw std::runtime_error("Invalid file format" + filename);
+    checkFFormat(line, "date | value", filename);
     std::string key;
     float       value;
     while (std::getline(in_file, line))
     {
-        std::istringstream iss(line);
-        std::getline(iss, key, '|');
-        trimInPlace(key);
-        if (!isDateFormatValid(key))
-            std::cerr << RED << "Error: bad input => " << key << RE << std::endl;
-        iss >> value;
-        if (value < 0)
+        std::map<std::string, float>::iterator it;
+        const char* err = parseCheckLine(line, key, value, '|');
+        if (err == NULL)
         {
-            std::cout << RED << "Error: not a positive number."<< RE << std::endl;
+            it = _bic_rates.lower_bound(key);
+            if (it == _bic_rates.begin() && it->first != key)
+            err = ERR_OLD_DATE;
+        }
+        if (err != NULL)
+        {
+            std::cerr << RED << err;
+            if (std::string(err) == ERR_BAD_DATE)
+            std::cerr << " => " << key;
+            std::cout << RE << std::endl;
             continue ;
         }
-        if (static_cast<long>(value) > std::numeric_limits<int>::max())
-        {
-            std::cout << RED << "Error: too large number." << RE << std::endl;
-            continue ;
-        }
-        std::map<std::string, float>::iterator it = _bic_rates.lower_bound(key);
-        if (it == _bic_rates.begin() && it->first != key)
-        {
-            std::cerr << RED << "No earlier date found" << RE << std::endl;
-            continue ;
-        }
-        else if (it->first == key)
-            std::cout << key << " => " << value << " = " << it->second * value << std::endl;
-        else
-            std::cout << key << " => " << value << " = " << (--it)->second * value << std::endl;
-
+        else if (it->first != key)
+        --it;
+        std::cout << key << " => " << value << " = " << it->second * value << std::endl;
     }
 }
 
+const char*    BitcoinExchange::parseCheckLine(std::string& l, std::string& k, float& v, char d)
+{
+    std::istringstream iss(l);
+    std::getline(iss, k, d);
+    trimInPlace(k);
+    if (!isDateFormatValid(k))
+        return  ERR_BAD_DATE;
+    if (d == ',' && _bic_rates.find(k) != _bic_rates.end())
+        return ERR_DUP;
+    if (iss.peek() == EOF)
+        return ERR_NO_VAL;
+    iss >> v;
+    if (v < 0)
+        return ERR_NEGATIVE;
+    if (v > 1000 && d == '|')
+        return ERR_BIG_N;
+    return NULL;
+}
 
 
 

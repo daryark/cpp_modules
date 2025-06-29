@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:30:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/29 16:47:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:28:15 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,15 @@ void    trimInPlace(std::string& s, std::string delim)
         s = s.substr(first, last - first + 1);
 }
 
-// static void    printErrType(std::string type)
-// {
-//     if (type == "file")
-//         std::cerr << RED << "Error opening file" << RE << std::endl;
-//     else
-//         std::cerr << RED << "Error" << RE << std::endl;
-// }
+void    checkOpenFS(std::string& f, std::ifstream& ifs)
+{
+    if (!ifs.is_open())
+        throw std::runtime_error("Failed to open file: " + f);
+}
+
+void    checkFFormat(std::string s1, std::string s2, std::string& filename)
+{
+    if (s1.compare(s2) != 0)
+        throw std::runtime_error("Invalid file format" + filename);
+}
+
