@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 00:32:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/30 14:06:34 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:10:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ float   RPN::calc(std::string s)
     }
     if (_stack.size() != 1)
         throw std::logic_error("Wrong argument: Not enough operations to calculate");
-    // _stack::container_type::clear();
     return _stack.top();
 }
 
