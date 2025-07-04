@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/03 15:29:11 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:11:25 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ class PmergeMe
 private:
     C _arr;
 
-    void    sort(unsigned int);
+    void    sort();
+    void    insert_sort();
+    void    fillArrType(C&, bool);
 
-    void    printArr(std::string);
+    void    printArr(std::string, unsigned int);
 public:
     PmergeMe(int, char**);
     ~PmergeMe(){};
