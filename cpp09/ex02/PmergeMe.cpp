@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 19:15:56 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:32:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ PmergeMe<C>&   PmergeMe<C>::operator=(const PmergeMe<C>& other)
 template <typename C>
 void    PmergeMe<C>::run()
 {
-    printArr("Before", 1);
+    printArr("Before", _arr);
     //start the time;
     sort();
-    printArr("After", 1);
+    printArr("After", _arr);
     //printTime(type of container);
     
 }
@@ -61,24 +61,28 @@ void    PmergeMe<C>::sort()
             std::swap(_arr[i], _arr[i + 1]);
     }
     std::cout << YELLOW;
-    printArr("swaped, 1 stage", 1);
+    printArr("swaped, 1 stage", _arr);
     std::cout << RE;
     insert_sort();
-    //#add 1 lowest element to the main also!!!
-    // C   pend.reserve(_arr.size() / 2);
-    // C   main.reserve(_arr.size() / 2);
-    // fillArrType(main, 1);
-    // fillArr(pend, 0);
-    // if (_arr.size() % 2)
-    //     pend.push_back(_arr[_arr.back()]);
-    // _arr = main;
+    C   pend;
+    C   main;
+    main.push_back(*_arr.begin());
+    fillArrType(main, 1);
+    fillArrType(pend, 2);
+    _arr = main;
+    printArr("main", main);
+    printArr("pend", pend);
 }
 
 template <typename C>
-void    PmergeMe<C>::fillArrType(C& arr, bool at)
+void    PmergeMe<C>::fillArrType(C& arr, unsigned int at)
 {
     for (unsigned int i = at; i < _arr.size(); i += 2)
+    {
         arr.push_back(_arr[i]);
+        if (_arr.begin() + i + 1 == _arr.end())
+            return ;
+    }
 }
 
 template <typename C>
@@ -103,7 +107,6 @@ void    PmergeMe<C>::insert_sort()
                 // std::cout << MAGENTA << "[" << *(b + j -1) << " " << *(b + j) << "]" << " [" << *(b + j + 1) << " " << *(b + j + 2) << "]" << RE << std::endl;
                 // _arr[j + 2] = _arr[j];
                 std::swap_ranges((b + j - 1), (b + j + 1), (b + j + 1));
-                printArr("- ", 1);
             }
             else
             {
@@ -111,6 +114,7 @@ void    PmergeMe<C>::insert_sort()
                 break ;
             }
         }
+        printArr("- ", _arr);
         // if (tmp >= 0)
         // _arr[j + 2] = tmp;
         // std::swap_ranges()
@@ -121,11 +125,11 @@ void    PmergeMe<C>::insert_sort()
 }
 
 template <typename C>
-void    PmergeMe<C>::printArr(std::string name, unsigned int it)
+void    PmergeMe<C>::printArr(std::string header, C& arr)
 {
-    std::cout << name << ": ";
-    for (unsigned int i = 0; i < _arr.size(); i+= it)
-            std::cout << _arr[i] << " ";
+    std::cout << header << ": ";
+    for (unsigned int i = 0; i < arr.size(); i++)
+            std::cout << arr[i] << " ";
     std::cout << std::endl;
 }
 

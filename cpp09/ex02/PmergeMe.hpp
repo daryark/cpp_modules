@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 19:11:25 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:31:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ private:
 
     void    sort();
     void    insert_sort();
-    void    fillArrType(C&, bool);
+    void    fillArrType(C&, unsigned int);
 
-    void    printArr(std::string, unsigned int);
+    void    printArr(std::string,  C&);
 public:
     PmergeMe(int, char**);
     ~PmergeMe(){};
