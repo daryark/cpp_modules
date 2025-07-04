@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 22:31:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/04 23:29:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,42 @@ void    PmergeMe<C>::sort()
     _arr = main;
     printArr("main", main);
     printArr("pend", pend);
-    std::vector<int>   insertIdxs = jakobstahlSequence(pend.size());
+    jakobstahlSequence(pend.size());
+    binarySearchInsert(pend);
 }
 
 template <typename C>
-std::vector<int>   PmergeMe<C>::jakobstahlSequence(int size)
+void    PmergeMe<C>::binarySearchInsert(C& pend)
+{
+    // int mid;
+    for (unsigned int i = 0; i < _JIdxs.size(); i++)
+    {
+        if ((int)pend.size() > _JIdxs[i])
+            std::cout << GREEN << pend[i] << " ";
+    }
+    std::cout << RE << std::endl;
+    
+}
+
+template <typename C>
+void    PmergeMe<C>::jakobstahlSequence(int size)
 {
     std::vector<int>   sequence;
     sequence.push_back(0);
     sequence.push_back(1);
-    for (int i = 2; sequence.back() < size; i++)
+    for (int i = 2; sequence.back() < size; i++) //#why when pend size = 6 (0-5idxs), i goes to till next (11)
         sequence.push_back(sequence[i - 1] + sequence[i - 2] * 2);
-    std::vector<int>   idxs(sequence.begin(), sequence.begin() + 2);
+    _JIdxs.push_back(0);
     int cur;
-    for (unsigned int i = 2; i < sequence.size(); i++)
+    for (unsigned int i = 1; i < sequence.size(); i++)
     {
         cur = sequence[i];
         while (cur > sequence[i - 1])
-            idxs.push_back(cur--);
+            _JIdxs.push_back(cur--);
     }
-    return idxs;
+    for (unsigned int i = 0; i < _JIdxs.size(); i++)
+            std::cout << YELLOW << _JIdxs[i] << " ";
+    std::cout << RE << std::endl;
 }
 
 template <typename C>
