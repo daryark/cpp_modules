@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 19:32:22 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/04 22:31:23 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,37 @@ void    PmergeMe<C>::sort()
     C   pend;
     C   main;
     main.push_back(*_arr.begin());
-    fillArrType(main, 1);
-    fillArrType(pend, 2);
+    fillArrEachTwoFromIdx(main, 1);
+    fillArrEachTwoFromIdx(pend, 2);
     _arr = main;
     printArr("main", main);
     printArr("pend", pend);
+    std::vector<int>   insertIdxs = jakobstahlSequence(pend.size());
 }
 
 template <typename C>
-void    PmergeMe<C>::fillArrType(C& arr, unsigned int at)
+std::vector<int>   PmergeMe<C>::jakobstahlSequence(int size)
 {
-    for (unsigned int i = at; i < _arr.size(); i += 2)
+    std::vector<int>   sequence;
+    sequence.push_back(0);
+    sequence.push_back(1);
+    for (int i = 2; sequence.back() < size; i++)
+        sequence.push_back(sequence[i - 1] + sequence[i - 2] * 2);
+    std::vector<int>   idxs(sequence.begin(), sequence.begin() + 2);
+    int cur;
+    for (unsigned int i = 2; i < sequence.size(); i++)
+    {
+        cur = sequence[i];
+        while (cur > sequence[i - 1])
+            idxs.push_back(cur--);
+    }
+    return idxs;
+}
+
+template <typename C>
+void    PmergeMe<C>::fillArrEachTwoFromIdx(C& arr, unsigned int start)
+{
+    for (unsigned int i = start; i < _arr.size(); i += 2)
     {
         arr.push_back(_arr[i]);
         if (_arr.begin() + i + 1 == _arr.end())

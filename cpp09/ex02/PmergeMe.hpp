@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 19:31:22 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:52:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ private:
 
     void    sort();
     void    insert_sort();
-    void    fillArrType(C&, unsigned int);
+    void    fillArrEachTwoFromIdx(C&, unsigned int);
+    std::vector<int>   jakobstahlSequence(int);
 
     void    printArr(std::string,  C&);
 public:
