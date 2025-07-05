@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 22:37:50 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:55:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ private:
     void    fillArrEachTwoFromIdx(C&, unsigned int);
     void    jakobstahlSequence(int);
     void    binarySearchInsert(C&);
+    void    binaryInsertElem(int);
 
     void    printArr(std::string,  C&);
 public:

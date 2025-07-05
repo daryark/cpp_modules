@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/05 16:51:21 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/05 21:38:54 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,54 @@ void    PmergeMe<C>::sort()
 }
 
 template <typename C>
+void    PmergeMe<C>::binaryInsertElem(int el)
+{
+    int prev_mid = _arr.size();
+    int mid = _arr.size() / 2;
+    int step;
+    int tmp;
+    //# cases of exiting the loop = finding the place to insert the element
+    //while element is not the first or last in comparison. then compare only with one side
+    //while it is not: mid < el < mid+1
+    //while it is not equal with one of the elements
+    int i = 10;
+    while (i--)
+    {
+        if (!_arr[mid] || _arr.size() == (size_t)(mid+1))//* if arr mid can become negative ?
+        {    std::cout << B_RED << "Edge pos" << RE << std::endl;
+            break ;
+        }
+        if (el == _arr[mid] || el == _arr[mid + 1])
+        {    std::cout << B_YELLOW << "Equal" << RE << std::endl;
+            break ;
+        }
+        if (el > _arr[mid] && el < _arr[mid + 1])
+        {    std::cout << B_GREEN << "Place found" << RE << std::endl;
+            break ;
+        }
+        tmp = mid;
+        step = abs(prev_mid - mid) / 2;
+        if (step == 0)
+            step = 1;
+        if (el < _arr[mid])
+            mid -= step;
+        else
+            mid += step;
+        prev_mid = tmp;
+    }
+    std::cout << B_BLUE << "mid: " << _arr[mid] << " el: " << el << " next: " << _arr[mid + 1] << RE << std::endl;
+    _arr.insert(_arr.begin() + ++mid, el);
+    printArr("inserted: ", _arr);
+}
+
+template <typename C>
 void    PmergeMe<C>::binarySearchInsert(C& pend)
 {
-    // int mid;
     for (unsigned int i = 0; i < _JIdxs.size(); i++)
     {
         if ((int)pend.size() > _JIdxs[i])
-            std::cout << GREEN << pend[_JIdxs[i]] << " ";
-        else
-            std::cout << MAGENTA << "(" << _JIdxs[i] << ") ";
+            binaryInsertElem(pend[_JIdxs[i]]);
     }
-    std::cout << RE << std::endl;
     
 }
 
