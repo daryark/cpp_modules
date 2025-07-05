@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/05 21:38:54 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/05 23:10:38 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,31 @@ PmergeMe<C>::PmergeMe(int ac, char** av)
 }
 
 template <typename C>
+PmergeMe<C>::PmergeMe(const PmergeMe<C>& other): _arr(other._arr){}
+
+template <typename C>
 PmergeMe<C>&   PmergeMe<C>::operator=(const PmergeMe<C>& other)
 {
-    // if (this != &other)
-    //     _arr = other._arr;
-    (void)other;
+    if (this != &other)
+        _arr = other._arr;
     return *this;
 }
 
 template <typename C>
 void    PmergeMe<C>::run()
 {
-    printArr("Before", _arr);
-    //start the time;
+    printArr("Before");
+    std::clock_t start = std::clock();
     sort();
-    printArr("After", _arr);
-    //printTime(type of container);
-    
+    std::clock_t end = std::clock();
+    printArr("After");
+    printTime(start, end);
 }
 
 template <typename C>
 void    PmergeMe<C>::sort()
 {
-    for(unsigned int i = 0; i < _arr.size(); i+= 2)
-    {
-        if (i + 1 == _arr.size())
-            break ;
-        if (_arr[i] > _arr[i + 1])
-            std::swap(_arr[i], _arr[i + 1]);
-    }
-    std::cout << YELLOW;
-    printArr("swaped, 1 stage", _arr);
-    std::cout << RE;
+    swap_pairs();
     insert_sort();
     C   pend;
     C   main;
@@ -70,8 +63,6 @@ void    PmergeMe<C>::sort()
     fillArrEachTwoFromIdx(main, 1);
     fillArrEachTwoFromIdx(pend, 2);
     _arr = main;
-    printArr("main", main);
-    printArr("pend", pend);
     jakobstahlSequence(pend.size());
     binarySearchInsert(pend);
 }
@@ -83,25 +74,10 @@ void    PmergeMe<C>::binaryInsertElem(int el)
     int mid = _arr.size() / 2;
     int step;
     int tmp;
-    //# cases of exiting the loop = finding the place to insert the element
-    //while element is not the first or last in comparison. then compare only with one side
-    //while it is not: mid < el < mid+1
-    //while it is not equal with one of the elements
-    int i = 10;
-    while (i--)
+    while (mid >= 0 && static_cast<int>(_arr.size()) != (mid + 1) //edge el
+        && el != _arr[mid] && el != _arr[mid + 1] //equal el
+        && !(el > _arr[mid] && el < _arr[mid + 1])) //found place
     {
-        if (!_arr[mid] || _arr.size() == (size_t)(mid+1))//* if arr mid can become negative ?
-        {    std::cout << B_RED << "Edge pos" << RE << std::endl;
-            break ;
-        }
-        if (el == _arr[mid] || el == _arr[mid + 1])
-        {    std::cout << B_YELLOW << "Equal" << RE << std::endl;
-            break ;
-        }
-        if (el > _arr[mid] && el < _arr[mid + 1])
-        {    std::cout << B_GREEN << "Place found" << RE << std::endl;
-            break ;
-        }
         tmp = mid;
         step = abs(prev_mid - mid) / 2;
         if (step == 0)
@@ -112,9 +88,7 @@ void    PmergeMe<C>::binaryInsertElem(int el)
             mid += step;
         prev_mid = tmp;
     }
-    std::cout << B_BLUE << "mid: " << _arr[mid] << " el: " << el << " next: " << _arr[mid + 1] << RE << std::endl;
     _arr.insert(_arr.begin() + ++mid, el);
-    printArr("inserted: ", _arr);
 }
 
 template <typename C>
@@ -125,7 +99,6 @@ void    PmergeMe<C>::binarySearchInsert(C& pend)
         if ((int)pend.size() > _JIdxs[i])
             binaryInsertElem(pend[_JIdxs[i]]);
     }
-    
 }
 
 template <typename C>
@@ -144,10 +117,6 @@ void    PmergeMe<C>::jakobstahlSequence(int size)
         while (cur > sequence[i - 1])
             _JIdxs.push_back(cur--);
     }
-    std::cout << "Jakobstahl idxs: ";
-    for (unsigned int i = 0; i < _JIdxs.size(); i++)
-            std::cout << YELLOW << _JIdxs[i] << " ";
-    std::cout << RE << std::endl;
 }
 
 template <typename C>
@@ -164,54 +133,59 @@ void    PmergeMe<C>::fillArrEachTwoFromIdx(C& arr, unsigned int start)
 template <typename C>
 void    PmergeMe<C>::insert_sort()
 {
-    // int sz = 2;
+    int j;
     typename C::iterator b = _arr.begin();
     for (unsigned int i = 3; i < _arr.size(); i += 2)
     {
-        std::cout << GREEN << *(b + i) << RE;
-        std::cout << " i:" << i << " pos(" << i + 1 << ")" << std::endl;
-        // int tmp = _arr[i];//# i don't need tmp ? if i swap nearest pairs and preserve all the nums ?
-        //# or i need tmp just to orient on the value
-        int j;
         for (j = i - 2; j > 0; j -= 2)
         {
-            // std::cout << "j " << j << std::endl;
             if (_arr[j + 2] < _arr[j])
-            {
-                // std::cout << MAGENTA << "tmp < cur: " << tmp << " < " << _arr[j] << RE << std::endl;
-                // // std::cout << MAGENTA << _arr[j] << ", " << _arr[j + 2] << RE << std::endl;
-                // std::cout << MAGENTA << "[" << *(b + j -1) << " " << *(b + j) << "]" << " [" << *(b + j + 1) << " " << *(b + j + 2) << "]" << RE << std::endl;
-                // _arr[j + 2] = _arr[j];
                 std::swap_ranges((b + j - 1), (b + j + 1), (b + j + 1));
-            }
             else
-            {
-                // _arr[j + 2] = tmp;
                 break ;
-            }
         }
-        printArr("- ", _arr);
-        // if (tmp >= 0)
-        // _arr[j + 2] = tmp;
-        // std::swap_ranges()
     }
-    // for (unsigned int i = 1; i < _arr.size(); i += 2)
-    //     std::cout << YELLOW << _arr[i] << " " << RE;
-    std::cout << std::endl;
+}
+template <typename C>
+void    PmergeMe<C>::swap_pairs()
+{
+     for(unsigned int i = 0; i < _arr.size(); i+= 2)
+    {
+        if (i + 1 == _arr.size())
+            break ;
+        if (_arr[i] > _arr[i + 1])
+            std::swap(_arr[i], _arr[i + 1]);
+    }
 }
 
 template <typename C>
-void    PmergeMe<C>::printArr(std::string header, C& arr)
-{
-    std::cout << header << ": ";
-    for (unsigned int i = 0; i < arr.size(); i++)
-            std::cout << arr[i] << " ";
-    std::cout << std::endl;
+std::string PmergeMe<C>::getTypeInfoStr() {
+    if (is_same<C, std::vector<int> >::value)
+        return "vector<int>";
+    else if (is_same<C, std::deque<int> >::value)
+        return "deque<int>";
+    else
+        return "unknown container";
 }
 
 
+template <typename C>
+void    PmergeMe<C>::printTime(std::clock_t st, std::clock_t e)
+{
+    double time = static_cast<double>(e - st) / CLOCKS_PER_SEC * 1000000;
+    std::cout << "Time to process a range of " << _arr.size() << " with " << getTypeInfoStr() << " : " << BLUE << time << RE << " microseconds " << std::endl;
+}
 
-//Explisit instantiations (at the end, so compiler knows alrady all the fn's here)
+template <typename C>
+void    PmergeMe<C>::printArr(std::string header)
+{
+    std::cout << B_BLUE << header << ": " << RE;
+    for (unsigned int i = 0; i < _arr.size(); i++)
+            std::cout << _arr[i] << " ";
+    std::cout << std::endl;
+}
+
+//Explicit instantiations (at the end, so compiler knows alrady all the fn's here)
 template class PmergeMe<std::vector<int> >;
 template class PmergeMe<std::deque<int> >;
 
