@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/04 23:29:34 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:51:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ void    PmergeMe<C>::binarySearchInsert(C& pend)
     for (unsigned int i = 0; i < _JIdxs.size(); i++)
     {
         if ((int)pend.size() > _JIdxs[i])
-            std::cout << GREEN << pend[i] << " ";
+            std::cout << GREEN << pend[_JIdxs[i]] << " ";
+        else
+            std::cout << MAGENTA << "(" << _JIdxs[i] << ") ";
     }
     std::cout << RE << std::endl;
     
@@ -95,7 +97,7 @@ void    PmergeMe<C>::jakobstahlSequence(int size)
     std::vector<int>   sequence;
     sequence.push_back(0);
     sequence.push_back(1);
-    for (int i = 2; sequence.back() < size; i++) //#why when pend size = 6 (0-5idxs), i goes to till next (11)
+    for (int i = 2; sequence.back() < (size - 1); i++)
         sequence.push_back(sequence[i - 1] + sequence[i - 2] * 2);
     _JIdxs.push_back(0);
     int cur;
@@ -105,6 +107,7 @@ void    PmergeMe<C>::jakobstahlSequence(int size)
         while (cur > sequence[i - 1])
             _JIdxs.push_back(cur--);
     }
+    std::cout << "Jakobstahl idxs: ";
     for (unsigned int i = 0; i < _JIdxs.size(); i++)
             std::cout << YELLOW << _JIdxs[i] << " ";
     std::cout << RE << std::endl;
@@ -135,7 +138,7 @@ void    PmergeMe<C>::insert_sort()
         int j;
         for (j = i - 2; j > 0; j -= 2)
         {
-            std::cout << "j " << j << std::endl;
+            // std::cout << "j " << j << std::endl;
             if (_arr[j + 2] < _arr[j])
             {
                 // std::cout << MAGENTA << "tmp < cur: " << tmp << " < " << _arr[j] << RE << std::endl;
