@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:13:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/29 23:39:50 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/06 16:55:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ public:
     void    exchange(std::string);
 };
 
-bool    isDateFormatValid(std::string&);
-bool    isDayOfMonthValid(int& y, int& m, int& d);
-void    extractDate(std::string& date, int& y, int& m, int& d);
-bool    isLeapYear(int);
-void    trimInPlace(std::string& , std::string delim = " \t\n\r\f\v");
-void    checkOpenFS(std::string&, std::ifstream&);
-void    checkFFormat(std::string s1, std::string s2, std::string& filename);
+const char* ifValidWriteNum(std::string s, float& value, char file_delim);
+bool        isDateFormatValid(std::string& date_str);
+bool        isDayOfMonthValid(int& y, int& m, int& d);
+void        extractDate(std::string& date, int& y, int& m, int& d);
+bool        isLeapYear(int y);
+void        trimInPlace(std::string& , std::string delim = " \t\n\r\f\v");
+void        checkOpenFS(std::string& n, std::ifstream& f);
+void        checkFFormat(std::string s1, std::string s2, std::string& filename);
 
 
 // #define SHORT_MONTHS_MASK ((1 << 4) | (1 << 6) | (1 << 9) | (1 << 11))

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:21:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/29 23:39:04 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/06 16:56:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,9 @@ const char*    BitcoinExchange::parseCheckLine(std::string& l, std::string& k, f
         return  ERR_BAD_DATE;
     if (d == ',' && _bic_rates.find(k) != _bic_rates.end())
         return ERR_DUP;
-    if (iss.peek() == EOF)
-        return ERR_NO_VAL;
-    iss >> v;
-    if (v < 0)
-        return ERR_NEGATIVE;
-    if (v > 1000 && d == '|')
-        return ERR_BIG_N;
-    return NULL;
+    std::string str;
+    iss >> str;
+    return ifValidWriteNum(str, v, d);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:30:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/06/29 23:28:15 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:05:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool    isDateFormatValid(std::string& date)
     int month;
     int day;
     extractDate(date, year, month, day);
-    if (year < 2009 || month > 12 || !isDayOfMonthValid(year, month, day))
+    if (month > 12 || !isDayOfMonthValid(year, month, day))
         return false;
     return true;
 }
@@ -54,6 +54,33 @@ void    extractDate(std::string& date, int& y, int& m, int& d)
     y = atoi(s_y.c_str());
     m = atoi(s_m.c_str());
     d = atoi(s_d.c_str());
+}
+
+const char* ifValidWriteNum(std::string s, float& v, char d)
+{
+    
+    if (s.empty())
+        return ERR_NEGATIVE;
+    bool dot = false;
+    for (size_t i = 0; i < s.length(); i++)
+    {
+        if (s[i] == '.')
+        {
+            if (dot)
+                return ERR_NEGATIVE;
+            dot = true;
+            continue ;
+        }
+        if (!std::isdigit(s[i]))
+            return ERR_NEGATIVE;
+    }
+    std::istringstream niss(s);
+    niss >> v;
+    if (v < 0)
+        return ERR_NEGATIVE;
+    if (v > 1000 && d == '|')
+        return ERR_BIG_N;
+    return NULL;
 }
 
 void    trimInPlace(std::string& s, std::string delim)

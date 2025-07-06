@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/05 23:06:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:08:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ private:
     C _JIdxs;
 
     void    sort();
+    void    new_sort(unsigned int sz);
     void    swap_pairs();
     void    insert_sort();
     void    fillArrEachTwoFromIdx(C&, unsigned int);
