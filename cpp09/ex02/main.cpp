@@ -17,7 +17,7 @@ int main(int ac, char** av)
     try
     {
         PmergeMe<std::vector<int> > pmergemeV(ac, av);
-        // pmergemeV.run();
+        pmergemeV.run();
         // std::cout << GREEN << "---------------------------------------------------------------" << RE << std::endl;
         // PmergeMe<std::deque<int> > pmergemeD(ac, av);
         // pmergemeD.run();

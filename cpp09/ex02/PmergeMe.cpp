@@ -62,11 +62,11 @@ PmergeMe<C>&   PmergeMe<C>::operator=(const PmergeMe<C>& other)
 template <typename C>
 void    PmergeMe<C>::run()
 {
-    printArr("Before");
+    printArr("Before", _arr);
     std::clock_t start = std::clock();
     sort(1);
     std::clock_t end = std::clock();
-    printArr("After");
+    printArr("After", _arr);
     printTime(start, end);
 }
 
@@ -103,74 +103,131 @@ void    PmergeMe<C>::sort(long unsigned int sz) //*4 (2 * 2 pairs) - example
     }
     std::ostringstream oss;
     oss << sz;
-    printArr(oss.str());
+    printArr(oss.str(), _arr);
     sort(sz * 2);
     C pend;
     C main;
     C non_part;
-    form_arr_parts(sz, &main, &pend, &non_part);
-    // jakobstahlSequence(pend.size() / sz);
-    // binarySearchInsert(sz, &main, &pend);
+    form_arr_parts(sz, main, pend, non_part);
+    printArr("Main arr: ", main);
+    printArr("Pend arr: ", pend);
+    printArr("Non arr: ", non_part);
+    C j_idxs;
+    jakobstahlSequence(pend.size() / sz, j_idxs);
+    printArr("j_idxs: ", j_idxs);
+    // binarySearchInsert(sz, j_idxs, &main, &pend);
     // main.push_back
 }
 
 template <typename C>
-void    PmergeMe<C>::form_arr_parts(long unsigned int sz C& m, C& p, C& non)
+void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 {
-    if (sz * 4 > _arr.size())
+    long unsigned int i;
+    std::cout << GREEN << "sz: " << sz << ", amnt " << _arr.size()/sz << ", left " << _arr.size() % sz << RE << std::endl;
+    if (sz * 3 > _arr.size())
         return ;
-    
-}
-
-template <typename C>
-void    PmergeMe<C>::binaryInsertElem(int el)
-{
-    int prev_mid = _arr.size();
-    int mid = _arr.size() / 2;
-    int step;
-    int tmp;
-    while (mid >= 0 && static_cast<int>(_arr.size()) != (mid + 1) //edge el
-        && el != _arr[mid] && el != _arr[mid + 1] //equal el
-        && !(el > _arr[mid] && el < _arr[mid + 1])) //found place
+    m.insert(m.end(), _arr.begin(), _arr.begin() + 2 * sz);
+    for (i = sz * 2; i < _arr.size(); i += sz)
     {
-        tmp = mid;
-        step = abs(prev_mid - mid) / 2;
-        if (step == 0)
-            step = 1;
-        if (el < _arr[mid])
-            mid -= step;
+        if (_arr.size() >= (i + sz))
+            p.insert(p.end(), _arr.begin() + i, _arr.begin() + i + sz);
         else
-            mid += step;
-        prev_mid = tmp;
+            break ;
+        i+=sz;
+        if (_arr.size() >= (i + sz))
+            m.insert(m.end(), _arr.begin() + i, _arr.begin() + i + sz);
+        else
+            break ;
     }
-    _arr.insert(_arr.begin() + ++mid, el);
+    std::cout << "it: " << i << std::endl;
+    if (_arr.size() > i)
+        non.insert(non.end(), _arr.begin() + i, _arr.end());
 }
 
-template <typename C>
-void    PmergeMe<C>::binarySearchInsert(C& pend)
-{
-    for (unsigned int i = 0; i < _JIdxs.size(); i++)
-    {
-        if ((int)pend.size() > _JIdxs[i])
-            binaryInsertElem(pend[_JIdxs[i]]);
-    }
-}
+// template <typename C>
+// void    PmergeMe<C>::binaryInsertElem(int el)
+// {
+//     int prev_mid = _arr.size();
+//     int mid = _arr.size() / 2;
+//     int step;
+//     int tmp;
+//     while (mid >= 0 && static_cast<int>(_arr.size()) != (mid + 1) //edge el
+//         && el != _arr[mid] && el != _arr[mid + 1] //equal el
+//         && !(el > _arr[mid] && el < _arr[mid + 1])) //found place
+//     {
+//         tmp = mid;
+//         step = abs(prev_mid - mid) / 2;
+//         if (step == 0)
+//             step = 1;
+//         if (el < _arr[mid])
+//             mid -= step;
+//         else
+//             mid += step;
+//         prev_mid = tmp;
+//     }
+//     _arr.insert(_arr.begin() + ++mid, el);
+// }
+
+// template <typename C>
+// void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_idxs)
+// {
+//     for (unsigned int i = 0; i < j_idxs.size(); i++)
+//     {
+//         if ((int)pend.size() > j_idxs[i])
+//             binaryInsertElem(pend[j_idxs[i]]);
+//     }
+// }
+
+//* new version...
+// template <typename C>
+// void    PmergeMe<C>::binaryInsertElem(int el, long unsigned int sz, C& m)
+// {
+//     int prev_mid = m.size() / sz;
+//     int mid = m.size() / sz / 2; //what if m has odd amnt of chunks ?
+//     int step;
+//     int tmp;
+//     while (mid >= 0 && static_cast<int>(m.size() / sz) != (mid + 1) //edge el
+//         && el != m[mid * sz] && el != m[mid * sz + sz] //equal el
+//         && !(el > m[mid * sz] && el < m[mid * sz + sz])) //found place
+//     {
+//         tmp = mid;
+//         step = abs(prev_mid - mid) / 2;
+//         if (step == 0)
+//             step = 1;
+//         if (el < m[mid * sz])
+//             mid -= step;
+//         else
+//             mid += step;
+//         prev_mid = tmp;
+//     }
+//     m.insert(m.begin() + ++mid * sz, el);
+// }
+
+// template <typename C>
+// void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_idxs)
+// {
+//     for (unsigned int i = 0; i < j_idxs.size(); i += sz)
+//     {
+//         if (static_cast<int>(p.size() / sz) > j_idxs[i])
+//             binaryInsertElem(p[j_idxs[i] * sz], sz, m);
+//     }
+// }
 
 template <typename C>
-void    PmergeMe<C>::jakobstahlSequence(int size)
+void    PmergeMe<C>::jakobstahlSequence(int size, C& j_idxs)
 {
-    std::vector<int>   sequence;
+    C  sequence;
     sequence.push_back(0);
     sequence.push_back(1);
     for (int i = 2; sequence.back() < (size - 1); i++)
         sequence.push_back(sequence[i - 1] + sequence[i - 2] * 2);
-    _JIdxs.push_back(0);
+    j_idxs.push_back(0);
     int cur;
     for (unsigned int i = 1; i < sequence.size(); i++)
     {
         cur = sequence[i];
         while (cur > sequence[i - 1])
-            _JIdxs.push_back(cur--);
+            j_idxs.push_back(cur--);
     }
 }
 
@@ -232,11 +289,11 @@ void    PmergeMe<C>::printTime(std::clock_t st, std::clock_t e)
 }
 
 template <typename C>
-void    PmergeMe<C>::printArr(std::string header)
+void    PmergeMe<C>::printArr(std::string header, C& arr)
 {
     std::cout << B_BLUE << header << ": " << RE;
-    for (unsigned int i = 0; i < _arr.size(); i++)
-            std::cout << _arr[i] << " ";
+    for (unsigned int i = 0; i < arr.size(); i++)
+            std::cout << arr[i] << " ";
     std::cout << std::endl;
 }
 

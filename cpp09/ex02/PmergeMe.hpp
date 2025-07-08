@@ -57,20 +57,20 @@ private:
     typedef std::pair<int, int> pair;
 
     C _arr;
-    C _JIdxs;
-    typename C_pair_arr<C>::type _pairs_arr;
+    // typename C_pair_arr<C>::type _pairs_arr;
 
     // void        sort();
     void        sort(long unsigned int sz);
-    void        form_arr_parts(long unsigned int sz, C& m, C& p, &non);
+    void        form_arr_parts(long unsigned int sz, C& m, C& p, C& non);
     // void        create_pairs();
     void        swap_pairs();
     void        insert_sort();
     void        fillArrEachTwoFromIdx(C&, unsigned int);
-    void        jakobstahlSequence(int);
-    void        binarySearchInsert(C&);
-    void        binaryInsertElem(int);
+    void        jakobstahlSequence(int sz, C& idxs);
+    // void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
+    // void        binaryInsertElem(int el, long unsigned int sz, C& m);
 
+    void        printArr(std::string, C& arr);
     void        printTime(std::clock_t st, std::clock_t end);
     std::string getTypeInfoStr();
 
@@ -81,7 +81,6 @@ public:
     PmergeMe&   operator=(const PmergeMe&);
     
     void        run();
-    void        printArr(std::string);
 };
 
 //# ln 59, 60
