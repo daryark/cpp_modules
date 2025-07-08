@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:09:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/05 23:10:43 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/08 14:57:00 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int main(int ac, char** av)
     try
     {
         PmergeMe<std::vector<int> > pmergemeV(ac, av);
-        pmergemeV.run();
-        std::cout << GREEN << "---------------------------------------------------------------" << RE << std::endl;
-        PmergeMe<std::deque<int> > pmergemeD(ac, av);
-        pmergemeD.run();
+        // pmergemeV.run();
+        // std::cout << GREEN << "---------------------------------------------------------------" << RE << std::endl;
+        // PmergeMe<std::deque<int> > pmergemeD(ac, av);
+        // pmergemeD.run();
     }
     catch(const std::exception& e)
     {

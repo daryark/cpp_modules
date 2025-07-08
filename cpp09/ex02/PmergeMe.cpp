@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/06 14:12:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:56:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ PmergeMe<C>::PmergeMe(int ac, char** av)
         }
         _arr.push_back(atoi(av[i]));
     }
+    // create_pairs();
+
+    // for (long unsigned int i = 0; i < _pairs_arr.size(); i++)
+    // std::cout << MAGENTA << "[" << _pairs_arr[i].first << ", " << _pairs_arr[i].second << "]" << RE << std::endl;
 }
 
 template <typename C>
@@ -41,35 +45,49 @@ PmergeMe<C>&   PmergeMe<C>::operator=(const PmergeMe<C>& other)
     return *this;
 }
 
+// template <typename C>
+// void    PmergeMe<C>::create_pairs()
+// {
+//     pair p;
+//     for (long unsigned int i = 0; i < _arr.size(); i +=2)
+//     {
+//         if ((i + 1) == _arr.size())
+//             p = pair(_arr[i], -1);
+//         else
+//             p = pair(_arr[i], _arr[i + 1]);
+//         _pairs_arr.push_back(p);
+//     }
+// }
+
 template <typename C>
 void    PmergeMe<C>::run()
 {
     printArr("Before");
     std::clock_t start = std::clock();
-    sort();
+    sort(1);
     std::clock_t end = std::clock();
     printArr("After");
     printTime(start, end);
 }
 
-template <typename C>
-void    PmergeMe<C>::sort()
-{
-    // swap_pairs();
-    new_sort(1);
-    // printArr("new sort: ");
-    C   pend;
-    C   main;
-    main.push_back(*_arr.begin());
-    fillArrEachTwoFromIdx(main, 1);
-    fillArrEachTwoFromIdx(pend, 2);
-    _arr = main;
-    // jakobstahlSequence(pend.size());
-    // binarySearchInsert(pend);
-}
+// template <typename C>
+// void    PmergeMe<C>::sort()
+// {
+//     // swap_pairs();
+//     new_sort(1);
+//     // printArr("new sort: ");
+//     C   pend;
+//     C   main;
+//     main.push_back(*_arr.begin());
+//     fillArrEachTwoFromIdx(main, 1);
+//     fillArrEachTwoFromIdx(pend, 2);
+//     _arr = main;
+//     // jakobstahlSequence(pend.size());
+//     // binarySearchInsert(pend);
+// }
 
 template <typename C>
-void    PmergeMe<C>::new_sort(unsigned int sz) //*4 (2 * 2 pairs) - example
+void    PmergeMe<C>::sort(long unsigned int sz) //*4 (2 * 2 pairs) - example
 {
     std::cout << MAGENTA << "pairSz: " << sz << RE << std::endl;
     if (sz * 2 > _arr.size()) //* not enough elems to make 2 arrs to compare
@@ -86,7 +104,22 @@ void    PmergeMe<C>::new_sort(unsigned int sz) //*4 (2 * 2 pairs) - example
     std::ostringstream oss;
     oss << sz;
     printArr(oss.str());
-    new_sort(sz * 2);
+    sort(sz * 2);
+    C pend;
+    C main;
+    C non_part;
+    form_arr_parts(sz, &main, &pend, &non_part);
+    // jakobstahlSequence(pend.size() / sz);
+    // binarySearchInsert(sz, &main, &pend);
+    // main.push_back
+}
+
+template <typename C>
+void    PmergeMe<C>::form_arr_parts(long unsigned int sz C& m, C& p, C& non)
+{
+    if (sz * 4 > _arr.size())
+        return ;
+    
 }
 
 template <typename C>
