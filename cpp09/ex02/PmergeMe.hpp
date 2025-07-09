@@ -67,12 +67,13 @@ private:
     void        insert_sort();
     void        fillArrEachTwoFromIdx(C&, unsigned int);
     void        jakobstahlSequence(int sz, C& idxs);
-    // void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
-    // void        binaryInsertElem(int el, long unsigned int sz, C& m);
+    void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
+    void        binaryInsertElem(int el, long unsigned int sz, C& m);
 
     void        printArr(std::string, C& arr);
     void        printTime(std::clock_t st, std::clock_t end);
     std::string getTypeInfoStr();
+    unsigned int    szAdapt(int n, long unsigned int sz);
 
 public:
     PmergeMe(int, char**);

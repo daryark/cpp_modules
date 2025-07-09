@@ -115,7 +115,8 @@ void    PmergeMe<C>::sort(long unsigned int sz) //*4 (2 * 2 pairs) - example
     C j_idxs;
     jakobstahlSequence(pend.size() / sz, j_idxs);
     printArr("j_idxs: ", j_idxs);
-    // binarySearchInsert(sz, j_idxs, &main, &pend);
+    std::cout << B_YELLOW << "j_idxs.size: " << j_idxs.size() << RE << std::endl;
+    binarySearchInsert(sz, main, pend, j_idxs);
     // main.push_back
 }
 
@@ -179,39 +180,53 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 // }
 
 //* new version...
-// template <typename C>
-// void    PmergeMe<C>::binaryInsertElem(int el, long unsigned int sz, C& m)
-// {
-//     int prev_mid = m.size() / sz;
-//     int mid = m.size() / sz / 2; //what if m has odd amnt of chunks ?
-//     int step;
-//     int tmp;
-//     while (mid >= 0 && static_cast<int>(m.size() / sz) != (mid + 1) //edge el
-//         && el != m[mid * sz] && el != m[mid * sz + sz] //equal el
-//         && !(el > m[mid * sz] && el < m[mid * sz + sz])) //found place
-//     {
-//         tmp = mid;
-//         step = abs(prev_mid - mid) / 2;
-//         if (step == 0)
-//             step = 1;
-//         if (el < m[mid * sz])
-//             mid -= step;
-//         else
-//             mid += step;
-//         prev_mid = tmp;
-//     }
+template <typename C>
+void    PmergeMe<C>::binaryInsertElem(int el, long unsigned int sz, C& m)
+{
+    // std::cout << B_CYAN << "el: " << el << RE << std::endl;
+    int mid = m.size() / sz / 2; //what if m has odd amnt of chunks ?
+    int prev_mid = m.size() / sz;
+    std::cout << "prev: " << prev_mid << ", mid: " << mid << std::endl;
+    int step;
+    int tmp;
+    while (mid >= 0 && static_cast<int>(m.size() / sz) != (mid + 1) //edge el
+        && el != m[szAdapt(mid, sz)] && el != m[szAdapt(mid, sz) + sz] //equal el
+        && !(el > m[szAdapt(mid, sz)] && el < m[szAdapt(mid, sz) + sz])) //found place
+    {
+        tmp = mid;
+        step = abs(prev_mid - mid) / 2;
+        if (step == 0)
+            step = 1;
+        if (el < m[szAdapt(mid, sz)])
+            mid -= step;
+        else
+            mid += step;
+        prev_mid = tmp;
+    }
+    std::cout << "mid: " << mid << "= " << m[szAdapt(mid, sz)] << ", el: " << el << std::endl;
 //     m.insert(m.begin() + ++mid * sz, el);
-// }
+}
 
-// template <typename C>
-// void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_idxs)
-// {
-//     for (unsigned int i = 0; i < j_idxs.size(); i += sz)
-//     {
-//         if (static_cast<int>(p.size() / sz) > j_idxs[i])
-//             binaryInsertElem(p[j_idxs[i] * sz], sz, m);
-//     }
-// }
+template <typename C>       //not it, num
+unsigned int    PmergeMe<C>::szAdapt(int n, long unsigned int sz)
+{
+    return (n * sz - 1);
+}
+
+template <typename C>
+void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_idxs)
+{
+    (void)m;
+    for (unsigned int i = 0; i < j_idxs.size(); i++)
+    {
+        // std::cout << RED << "pend size: " << static_cast<int>(p.size())
+        // << ", p.sz / sz: " << static_cast<int>(p.size() / sz)
+        // << ", j_idxs[i]: " << j_idxs[i] << ", i: " << i 
+        // << "j_idxs.size(): " << j_idxs.size() << RE << std::endl; 
+        if (static_cast<int>(p.size() / sz) > j_idxs[i])
+            binaryInsertElem(p[szAdapt((j_idxs[i] + 1), sz)], sz, m);
+    }
+}
 
 template <typename C>
 void    PmergeMe<C>::jakobstahlSequence(int size, C& j_idxs)
