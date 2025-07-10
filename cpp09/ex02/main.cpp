@@ -16,9 +16,13 @@ int main(int ac, char** av)
 {
     try
     {
-        PmergeMe<std::deque<int> > pmergeme(ac, av);
-        pmergeme.run();
-        std::cout << B_GREEN<< (pmergeme.isSorted() ? " yes " : " no ") << RE << std::endl;
+        PmergeMe<std::vector<int> > vec(ac, av);
+        vec.run();
+        std::cout << B_GREEN<< (vec.isSorted() ? " yes " : " no ") << RE << std::endl;
+        std::cout << GREEN << "---------------------------------------------------------------" << RE << std::endl;
+        PmergeMe<std::deque<int> > deq(ac, av);
+        deq.run();
+        std::cout << B_GREEN<< (deq.isSorted() ? " yes " : " no ") << RE << std::endl;
         std::cout << GREEN << "---------------------------------------------------------------" << RE << std::endl;
     }
     catch(const std::exception& e)
