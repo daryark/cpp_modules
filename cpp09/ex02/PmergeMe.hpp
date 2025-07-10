@@ -68,7 +68,7 @@ private:
     void        fillArrEachTwoFromIdx(C&, unsigned int);
     void        jakobstahlSequence(int sz, C& idxs);
     void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
-    void        binaryInsertElem(int el, long unsigned int sz, C& m);
+    void        binaryInsertElem(int i, long unsigned int sz, C& m, C& p);
 
     void        printArr(std::string, C& arr);
     void        printTime(std::clock_t st, std::clock_t end);

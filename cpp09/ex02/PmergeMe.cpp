@@ -118,7 +118,12 @@ void    PmergeMe<C>::sort(long unsigned int sz) //*4 (2 * 2 pairs) - example
     // std::cout << B_YELLOW << "j_idxs.size: " << j_idxs.size() << RE << std::endl;
     binarySearchInsert(sz, main, pend, j_idxs);
     std::cout << BG_BLUE << "                  endln                  " << RE << std::endl;
-    // main.push_back
+    _arr = main;
+    if(non_part.size() > 0)
+    {    std::cout << "PEND\n";
+        _arr.insert(_arr.end(), non_part.begin(), non_part.end());
+        printArr("mmmM", _arr);
+    }
 }
 
 template <typename C>
@@ -126,8 +131,8 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 {
     long unsigned int i;
     std::cout << GREEN << "sz: " << sz << ", amnt " << _arr.size()/sz << ", left " << _arr.size() % sz << RE << std::endl;
-    if (sz * 3 > _arr.size())
-        return ;
+    // if (sz * 3 > _arr.size())
+    //     return ;
     m.insert(m.end(), _arr.begin(), _arr.begin() + 2 * sz);
     for (i = sz * 2; i < _arr.size(); i += sz)
     {
@@ -182,62 +187,101 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 
 //* new version...
 template <typename C> //mid - el - mid + 1 //if mid = 2 mid i is 1 (num of elem is 2)
-void    PmergeMe<C>::binaryInsertElem(int el, long unsigned int sz, C& m)
+void    PmergeMe<C>::binaryInsertElem(int i, long unsigned int sz, C& m, C& p)
 {
+    int el = p[szI(i + 1, sz)];
     std::cout << B_CYAN << "el: " << el << RE << std::endl;
     int prev_midI = m.size() / sz;
-    int midI = prev_midI / 2 + 1;
+    int midI = prev_midI / 2;
     int step;
     int tmp;
-    std::cout << MAGENTA << "Main full sz: " << prev_midI << " MID: " << midI << RE << std::endl;
     // while (mid >= 0 && static_cast<int>(m.size() / sz) != (mid + 1) //edge el
     //     && el != m[szI(mid, sz)] && el != m[szI(mid, sz) + sz] //equal el
     //     && !(el > m[szI(mid, sz)] && el < m[szI(mid, sz) + sz])) //found place
     while (true)
     {
-        if (midI <= 0 || static_cast<int>(m.size() / sz) > midI)
+        std::cout << BG_MAGENTA << "Main full sz: " << prev_midI << " MID: " << midI << RE << std::endl;
+        if (midI <= 0 || static_cast<int>(m.size() / sz) == midI) //? >midI
         {
-            if (midI < 0)
-                std::cout << BG_I_RED << "mid < 0" << RE << std::endl;
+            if (midI <= 0)
+                    std::cout << BG_I_RED << "mid <= 0" << RE << std::endl;
             else
-                std::cout << BG_I_RED << "mid: " << m[szI(midI - 1, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI, sz)] << RE << std::endl;
+                std::cout << BG_I_RED << "mid == size " << RE << std::endl;
             break ;
         }
-        if (el == m[szI(midI - 1, sz)] || el == m[szI(midI, sz)])
+        if (el == m[szI(midI, sz)] || el == m[szI(midI + 1, sz)])
         {
-            std::cout << BG_I_YELLOW << "EQ mid_el: " << m[szI(midI - 1, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI, sz)]<< RE << std::endl;
+            std::cout << BG_I_YELLOW << "EQ mid_el: " << m[szI(midI, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI + 1, sz)]<< RE << std::endl;
+            std::cout << BG_I_YELLOW << "midI: " << midI << " szI mid: " << szI(midI, sz) << " midI+szI: " << szI(midI + 1, sz) << RE << std::endl;
             break ;
         }
-        if (el > m[szI(midI - 1, sz)] && el < m[szI(midI, sz)])
+        if (el > m[szI(midI, sz)] && el < m[szI(midI + 1, sz)])
         {
-            std::cout << BG_I_GREEN << "F mid_el: " << m[szI(midI - 1, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI, sz)]<< RE << std::endl;
+            std::cout << BG_I_GREEN << "F mid_el: " << m[szI(midI, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI + 1, sz)]<< RE << std::endl;
             break ;
         }
         tmp = midI;
         step = abs(prev_midI - midI) / 2;
         if (step == 0)
             step = 1;
-        if (el < m[szI(midI - 1, sz)])
+        if (el < m[szI(midI, sz)])
         {
-            std::cout << BG_I_WHITE << "-step: " << step << ", midI - step: " << midI - step << RE << std::endl;
+            // std::cout << BG_I_WHITE << "-step: " << step << ", midI - step: " << midI - step << RE << std::endl;
             midI -= step;
         }
         else
         {
-            std::cout << BG_I_CYAN << "+step" << step << ", midI + step: " << midI + step << RE << std::endl;
+            // std::cout << BG_I_CYAN << "+step" << step << ", midI + step: " << midI + step << RE << std::endl;
             midI += step;
         }
         prev_midI = tmp;
     }
     // std::cout << "mid: " << mid << "= " << m[szI(mid, sz)] << ", el: " << el << std::endl;
-    std::cout << BG_YELLOW << *(m.begin() + midI*sz) << RE << std::endl;
-    // m.insert(m.begin() + midI * sz, el);
+    // std::cout << BG_YELLOW << *(m.begin() + szI(midI, sz)) << RE << std::endl;
+    if (midI <= 0)
+    {
+        if (i == 0)
+        {    
+            std::cout << "pend i == 0 && midI < 0\n";
+            m.insert(m.begin(), p.begin(), p.begin() + sz); //* OK
+        }
+        else
+        {    
+            std::cout << "midI < 0 and else\n";
+            m.insert(m.begin(), p.begin() + i*sz, p.begin() + i*sz + sz);} //*
+    }
+    else if (static_cast<int>(m.size() / sz) == midI)//? >midI
+    {
+        //!if it is EQ with next|| prev elem - should be the diff place to insert ? or just move one before ? for both...
+        if (i == 0)
+        {
+            std::cout << " i == 0 and midI==size: " << midI << std::endl;
+            m.insert(m.end(), p.begin(), p.begin() + sz); //* OK
+        }
+        else
+        {    
+            std::cout << " midI == size and else: " << std::endl;
+            m.insert(m.end(), p.begin() + i *sz, p.begin() + i * sz + sz);}//*
+    }
+    else
+    {
+        if (i == 0)
+        {
+            std::cout << "else and i == 0: " << std::endl;
+            m.insert(m.begin() + + szI(midI, sz) + 1, p.begin(), p.begin() + sz);
+        }
+        else
+        {
+            std::cout << "else: " << midI << std::endl;
+            m.insert(m.begin() + szI(midI, sz) + 1, p.begin() + i * sz, p.begin() + i * sz + sz);}
+    }
+    printArr("mmm: ", m);
 }
 
-template <typename C>       //not it, num
-unsigned int    PmergeMe<C>::szI(int n, long unsigned int sz)
+template <typename C>
+unsigned int    PmergeMe<C>::szI(int i, long unsigned int sz)
 {
-    return (n * sz - 1);
+    return (i * sz - 1);
 }
 
 template <typename C>
@@ -249,9 +293,9 @@ void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_id
         // std::cout << RED << "pend size: " << static_cast<int>(p.size())
         // << ", p.sz / sz: " << static_cast<int>(p.size() / sz)
         // << ", j_idxs[i]: " << j_idxs[i] << ", i: " << i 
-        // << "j_idxs.size(): " << j_idxs.size() << RE << std::endl; 
+        // << "j_idxs.size(): " << j_idxs.size() << RE << std::endl;
         if (static_cast<int>(p.size() / sz) > j_idxs[i])
-            binaryInsertElem(p[szI((j_idxs[i] + 1), sz)], sz, m);
+            binaryInsertElem(j_idxs[i], sz, m, p);
     }
 }
 
