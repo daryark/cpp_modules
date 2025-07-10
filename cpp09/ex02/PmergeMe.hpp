@@ -61,7 +61,7 @@ private:
 
     void        sort(long unsigned int sz);
     void        form_arr_parts(long unsigned int sz, C& m, C& p, C& non);
-    bool        insertBack(C& a, long unsigned int i, long unsigned int sz);
+    void        insertBack(C& a, typename C::iterator posA, C&b, long unsigned int i, long unsigned int sz);
     void        jakobstahlSequence(int sz, C& idxs);
     void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
     void        binaryInsertElem(int i, long unsigned int sz, C& m, C& p);

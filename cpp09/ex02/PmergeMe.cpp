@@ -59,7 +59,7 @@ void    PmergeMe<C>::sort(long unsigned int sz)
         return ;
     for(unsigned int i = 0; i < _arr.size(); i+= sz * 2)
     {
-        if (( _arr.size() > (i + sz * 2 - 1))
+        if (( _arr.size() > (i + 2 * sz - 1))
         && (*(_arr.begin() + i + sz - 1) > *(_arr.begin() + i + 2 * sz - 1) ))
             std::swap_ranges(_arr.begin() + i, _arr.begin() + i + sz, _arr.begin() + i + sz);
     }
@@ -67,49 +67,58 @@ void    PmergeMe<C>::sort(long unsigned int sz)
     C pend;
     C main;
     C non_part;
-    form_arr_parts(sz, main, pend, non_part);
     C j_idxs;
+    form_arr_parts(sz, main, pend, non_part);
     jakobstahlSequence(pend.size() / sz, j_idxs);
     binarySearchInsert(sz, main, pend, j_idxs);
     _arr = main;
     if(non_part.size() > 0)
+    {
+        if (sz > 1)
         _arr.insert(_arr.end(), non_part.begin(), non_part.end());
-}
-
-template <typename C>
-bool    PmergeMe<C>::insertBack(C& a, long unsigned int i, long unsigned int sz)
-{
-    if (_arr.size() < (i + sz))
-        return false;
-    a.insert(a.end(), _arr.begin() + i, _arr.begin() + i + sz);
-    return true;
+        else
+            binaryInsertElem(0, 1, _arr, non_part);
+    }
 }
 
 template <typename C>
 void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 {
     long unsigned int i;
+    bool isMain = false;
     m.insert(m.end(), _arr.begin(), _arr.begin() + 2 * sz);
-    for (i = sz * 2; i < _arr.size(); i += 2*sz)
+    for (i = sz * 2; i < _arr.size(); i += sz)
     {
-        if (!insertBack(p, i, sz) || !insertBack(p, i + sz, sz))
+        if (_arr.size() < (i + sz))
             break ;
+        isMain ? insertBack(m, m.end(), _arr, i, sz) : insertBack(p, p.end(), _arr, i, sz);
+        isMain = !isMain;
     }
     if (_arr.size() > i)
         non.insert(non.end(), _arr.begin() + i, _arr.end());
 }
 
-//midI position of the middle chunk(biggest=last=target elem), and also its it
-//ex: midI = 1; it will work for 0 iteration midI * sz -1 = 1 * 8 - 1 = 7 el in the first(0 it) chunk
 template <typename C>
-void    PmergeMe<C>::binaryInsertElem(int i, long unsigned int sz, C& m, C& p) //******/
+unsigned int    PmergeMe<C>::szI(int i, long unsigned int sz)
+{
+    return (i * sz - 1);
+}
+
+template <typename C>
+void    PmergeMe<C>::insertBack(C& a, typename C::iterator posA, C& b, long unsigned int i, long unsigned int sz)
+{
+    a.insert(posA, b.begin() + i, b.begin() + i + sz);
+}
+
+template <typename C>
+void    PmergeMe<C>::binaryInsertElem(int i, long unsigned int sz, C& m, C& p) 
 {
     int el = p[szI(i + 1, sz)];
-    int prev_midI = m.size() / sz;
-    int midI = prev_midI / 2;
-    int step;
-    int tmp;
-    while (midI > 0 && static_cast<int>(m.size() / sz) != midI //edge el
+    long unsigned int prev_midI = m.size() / sz;
+    long unsigned int midI = prev_midI / 2;
+    long unsigned int step;
+    long unsigned int tmp;
+    while (midI > 0 && m.size() / sz != midI //edge el
         && el != m[szI(midI, sz)] && el != m[szI(midI + 1, sz)] //equal el
         && !(el > m[szI(midI, sz)] && el < m[szI(midI + 1, sz)])) //found place
     {
@@ -121,36 +130,13 @@ void    PmergeMe<C>::binaryInsertElem(int i, long unsigned int sz, C& m, C& p) /
             midI -= step;
         else
             midI += step;
+     
         prev_midI = tmp;
     }
-    if (midI <= 0)
-    {
-        if (i == 0)
-            m.insert(m.begin(), p.begin(), p.begin() + sz);
-        else
-            m.insert(m.begin(), p.begin() + i*sz, p.begin() + i*sz + sz);
-    }
-    else if (static_cast<int>(m.size() / sz) == midI)
-    {
-        if (i == 0)
-            m.insert(m.end(), p.begin(), p.begin() + sz);
-        else
-            m.insert(m.end(), p.begin() + i *sz, p.begin() + i * sz + sz);
-    }
-    else
-    {
-        if (i == 0)
-            m.insert(m.begin() + midI * sz, p.begin(), p.begin() + sz);
-        else
-            m.insert(m.begin() + midI * sz, p.begin() + i * sz, p.begin() + i * sz + sz);
-    }
+    insertBack(m, m.begin() + midI * sz, p, i * sz, sz);
 }
-
-template <typename C>
-unsigned int    PmergeMe<C>::szI(int i, long unsigned int sz)
-{
-    return (i * sz - 1);
-}
+//midI position of the middle chunk(biggest=last=target elem), and also its it
+//ex: midI = 1; it will work for 0 iteration midI * sz -1 = 1 * 8 - 1 = 7 el in the first(0 it) chunk
 
 template <typename C>
 void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_idxs)
@@ -163,7 +149,7 @@ void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_id
 }
 
 template <typename C>
-void    PmergeMe<C>::jakobstahlSequence(int size, C& j_idxs) //******/
+void    PmergeMe<C>::jakobstahlSequence(int size, C& j_idxs)
 {
     C  sequence;
     sequence.push_back(0);
