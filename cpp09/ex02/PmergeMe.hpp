@@ -20,6 +20,7 @@
 #include <typeinfo>
 #include <sstream>
 #include <utility> //std::pair
+#include <algorithm>
 
 #include "../colors.hpp"
 
@@ -57,15 +58,9 @@ private:
     typedef std::pair<int, int> pair;
 
     C _arr;
-    // typename C_pair_arr<C>::type _pairs_arr;
 
-    // void        sort();
     void        sort(long unsigned int sz);
     void        form_arr_parts(long unsigned int sz, C& m, C& p, C& non);
-    // void        create_pairs();
-    void        swap_pairs();
-    void        insert_sort();
-    void        fillArrEachTwoFromIdx(C&, unsigned int);
     void        jakobstahlSequence(int sz, C& idxs);
     void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
     void        binaryInsertElem(int i, long unsigned int sz, C& m, C& p);
@@ -82,6 +77,7 @@ public:
     PmergeMe&   operator=(const PmergeMe&);
     
     void        run();
+    bool        isSorted();
 };
 
 //# ln 59, 60
