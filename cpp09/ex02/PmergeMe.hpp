@@ -19,25 +19,9 @@
 #include <ctime>
 #include <typeinfo>
 #include <sstream>
-#include <utility> //std::pair
 #include <algorithm>
 
 #include "../colors.hpp"
-
-// template <typename C>
-// struct C_pair_arr;
-
-// template<>
-// struct C_pair_arr<std::vector<int> >
-// {
-//     typedef std::vector<std::pair<int, int> > type;
-// };
-
-// template<>
-// struct C_pair_arr<std::deque<int> >
-// {
-//     typedef std::deque<std::pair<int, int> > type;
-// };
 
 template <typename T1, typename T2>
 struct is_same
