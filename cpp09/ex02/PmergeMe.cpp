@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/08 15:56:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/10 09:58:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void    PmergeMe<C>::sort(long unsigned int sz) //*4 (2 * 2 pairs) - example
     {
         if (( _arr.size() > (i + sz*2 - 1)) && (_arr[i + sz - 1] > _arr[i + sz*2 - 1] ))
         {
-            std::cout << YELLOW << "swap: " << _arr[i + sz - 1] << ", "
-            << _arr[i + sz*2 - 1] << RE << std::endl;
+            // std::cout << YELLOW << "swap: " << _arr[i + sz - 1] << ", "
+            // << _arr[i + sz*2 - 1] << RE << std::endl;
             std::swap_ranges(&_arr[i], &_arr[i + sz], &_arr[i + sz]);
         }
     }
@@ -109,14 +109,15 @@ void    PmergeMe<C>::sort(long unsigned int sz) //*4 (2 * 2 pairs) - example
     C main;
     C non_part;
     form_arr_parts(sz, main, pend, non_part);
+    C j_idxs;
+    jakobstahlSequence(pend.size() / sz, j_idxs);
     printArr("Main arr: ", main);
     printArr("Pend arr: ", pend);
     printArr("Non arr: ", non_part);
-    C j_idxs;
-    jakobstahlSequence(pend.size() / sz, j_idxs);
     printArr("j_idxs: ", j_idxs);
-    std::cout << B_YELLOW << "j_idxs.size: " << j_idxs.size() << RE << std::endl;
+    // std::cout << B_YELLOW << "j_idxs.size: " << j_idxs.size() << RE << std::endl;
     binarySearchInsert(sz, main, pend, j_idxs);
+    std::cout << BG_BLUE << "                  endln                  " << RE << std::endl;
     // main.push_back
 }
 
@@ -140,7 +141,7 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
         else
             break ;
     }
-    std::cout << "it: " << i << std::endl;
+    // std::cout << "it: " << i << std::endl;
     if (_arr.size() > i)
         non.insert(non.end(), _arr.begin() + i, _arr.end());
 }
@@ -148,7 +149,7 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 // template <typename C>
 // void    PmergeMe<C>::binaryInsertElem(int el)
 // {
-//     int prev_mid = _arr.size();
+//     int prev_midI = _arr.size();
 //     int mid = _arr.size() / 2;
 //     int step;
 //     int tmp;
@@ -157,14 +158,14 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 //         && !(el > _arr[mid] && el < _arr[mid + 1])) //found place
 //     {
 //         tmp = mid;
-//         step = abs(prev_mid - mid) / 2;
+//         step = abs(prev_midI - mid) / 2;
 //         if (step == 0)
 //             step = 1;
 //         if (el < _arr[mid])
 //             mid -= step;
 //         else
 //             mid += step;
-//         prev_mid = tmp;
+//         prev_midI = tmp;
 //     }
 //     _arr.insert(_arr.begin() + ++mid, el);
 // }
@@ -180,35 +181,61 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
 // }
 
 //* new version...
-template <typename C>
+template <typename C> //mid - el - mid + 1 //if mid = 2 mid i is 1 (num of elem is 2)
 void    PmergeMe<C>::binaryInsertElem(int el, long unsigned int sz, C& m)
 {
-    // std::cout << B_CYAN << "el: " << el << RE << std::endl;
-    int mid = m.size() / sz / 2; //what if m has odd amnt of chunks ?
-    int prev_mid = m.size() / sz;
-    std::cout << "prev: " << prev_mid << ", mid: " << mid << std::endl;
+    std::cout << B_CYAN << "el: " << el << RE << std::endl;
+    int prev_midI = m.size() / sz;
+    int midI = prev_midI / 2 + 1;
     int step;
     int tmp;
-    while (mid >= 0 && static_cast<int>(m.size() / sz) != (mid + 1) //edge el
-        && el != m[szAdapt(mid, sz)] && el != m[szAdapt(mid, sz) + sz] //equal el
-        && !(el > m[szAdapt(mid, sz)] && el < m[szAdapt(mid, sz) + sz])) //found place
+    std::cout << MAGENTA << "Main full sz: " << prev_midI << " MID: " << midI << RE << std::endl;
+    // while (mid >= 0 && static_cast<int>(m.size() / sz) != (mid + 1) //edge el
+    //     && el != m[szI(mid, sz)] && el != m[szI(mid, sz) + sz] //equal el
+    //     && !(el > m[szI(mid, sz)] && el < m[szI(mid, sz) + sz])) //found place
+    while (true)
     {
-        tmp = mid;
-        step = abs(prev_mid - mid) / 2;
+        if (midI <= 0 || static_cast<int>(m.size() / sz) > midI)
+        {
+            if (midI < 0)
+                std::cout << BG_I_RED << "mid < 0" << RE << std::endl;
+            else
+                std::cout << BG_I_RED << "mid: " << m[szI(midI - 1, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI, sz)] << RE << std::endl;
+            break ;
+        }
+        if (el == m[szI(midI - 1, sz)] || el == m[szI(midI, sz)])
+        {
+            std::cout << BG_I_YELLOW << "EQ mid_el: " << m[szI(midI - 1, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI, sz)]<< RE << std::endl;
+            break ;
+        }
+        if (el > m[szI(midI - 1, sz)] && el < m[szI(midI, sz)])
+        {
+            std::cout << BG_I_GREEN << "F mid_el: " << m[szI(midI - 1, sz)] <<  " el: " << el << " mid+_el: " << m[szI(midI, sz)]<< RE << std::endl;
+            break ;
+        }
+        tmp = midI;
+        step = abs(prev_midI - midI) / 2;
         if (step == 0)
             step = 1;
-        if (el < m[szAdapt(mid, sz)])
-            mid -= step;
+        if (el < m[szI(midI - 1, sz)])
+        {
+            std::cout << BG_I_WHITE << "-step: " << step << ", midI - step: " << midI - step << RE << std::endl;
+            midI -= step;
+        }
         else
-            mid += step;
-        prev_mid = tmp;
+        {
+            std::cout << BG_I_CYAN << "+step" << step << ", midI + step: " << midI + step << RE << std::endl;
+            midI += step;
+        }
+        prev_midI = tmp;
     }
-    std::cout << "mid: " << mid << "= " << m[szAdapt(mid, sz)] << ", el: " << el << std::endl;
-//     m.insert(m.begin() + ++mid * sz, el);
+    // std::cout << "mid: " << mid << "= " << m[szI(mid, sz)] << ", el: " << el << std::endl;
+    std::cout << BG_YELLOW << *(m.begin() + midI*sz) << RE << std::endl;
+    // m.insert(m.begin() + midI * sz, el);
 }
 
 template <typename C>       //not it, num
-unsigned int    PmergeMe<C>::szAdapt(int n, long unsigned int sz)
+unsigned int    PmergeMe<C>::szI(int n, long unsigned int sz)
 {
     return (n * sz - 1);
 }
@@ -224,7 +251,7 @@ void    PmergeMe<C>::binarySearchInsert(long unsigned int sz, C& m, C&p, C& j_id
         // << ", j_idxs[i]: " << j_idxs[i] << ", i: " << i 
         // << "j_idxs.size(): " << j_idxs.size() << RE << std::endl; 
         if (static_cast<int>(p.size() / sz) > j_idxs[i])
-            binaryInsertElem(p[szAdapt((j_idxs[i] + 1), sz)], sz, m);
+            binaryInsertElem(p[szI((j_idxs[i] + 1), sz)], sz, m);
     }
 }
 

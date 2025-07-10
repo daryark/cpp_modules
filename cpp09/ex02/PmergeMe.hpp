@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/08 15:51:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/09 17:04:31 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ private:
     void        printArr(std::string, C& arr);
     void        printTime(std::clock_t st, std::clock_t end);
     std::string getTypeInfoStr();
-    unsigned int    szAdapt(int n, long unsigned int sz);
+    unsigned int    szI(int n, long unsigned int sz);
 
 public:
     PmergeMe(int, char**);
