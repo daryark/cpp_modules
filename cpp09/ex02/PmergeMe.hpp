@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/09 17:04:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/11 12:43:13 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ private:
 
     void        sort(long unsigned int sz);
     void        form_arr_parts(long unsigned int sz, C& m, C& p, C& non);
-    void        insertBack(C& a, typename C::iterator posA, C&b, long unsigned int i, long unsigned int sz);
+    void        insertBack(C& a, int posA, C&b, long unsigned int i, long unsigned int sz);
     void        jakobstahlSequence(int sz, C& idxs);
     void        binarySearchInsert(long unsigned int, C& m, C& p, C& idxs);
     void        binaryInsertElem(int i, long unsigned int sz, C& m, C& p);

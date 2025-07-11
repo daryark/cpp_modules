@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:10:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2025/07/10 09:58:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2025/07/11 12:45:26 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void    PmergeMe<C>::form_arr_parts(long unsigned int sz, C& m, C& p, C& non)
     {
         if (_arr.size() < (i + sz))
             break ;
-        isMain ? insertBack(m, m.end(), _arr, i, sz) : insertBack(p, p.end(), _arr, i, sz);
+        isMain ? insertBack(m, m.size(), _arr, i, sz) : insertBack(p, p.size(), _arr, i, sz);
         isMain = !isMain;
     }
     if (_arr.size() > i)
@@ -105,9 +105,9 @@ unsigned int    PmergeMe<C>::szI(int i, long unsigned int sz)
 }
 
 template <typename C>
-void    PmergeMe<C>::insertBack(C& a, typename C::iterator posA, C& b, long unsigned int i, long unsigned int sz)
+void    PmergeMe<C>::insertBack(C& a, int posA, C& b, long unsigned int posB, long unsigned int sz)
 {
-    a.insert(posA, b.begin() + i, b.begin() + i + sz);
+    a.insert(a.begin() + posA, b.begin() + posB, b.begin() + posB + sz);
 }
 
 template <typename C>
@@ -133,7 +133,7 @@ void    PmergeMe<C>::binaryInsertElem(int i, long unsigned int sz, C& m, C& p)
      
         prev_midI = tmp;
     }
-    insertBack(m, m.begin() + midI * sz, p, i * sz, sz);
+    insertBack(m, midI * sz, p, i * sz, sz);
 }
 //midI position of the middle chunk(biggest=last=target elem), and also its it
 //ex: midI = 1; it will work for 0 iteration midI * sz -1 = 1 * 8 - 1 = 7 el in the first(0 it) chunk
